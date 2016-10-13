@@ -89,11 +89,19 @@ public class PersonalManager {
 
 		while (it.hasNext()) {
 
-			Mechanic current = it.next();
-			sb.append(current.getFullName()).append(", Current work: ").append(current.getCurrentOrder()).append("\n");
+			sb.append(returnStringMechanic(it.next()));
 		}
 
 		System.out.println(sb);
+	}
+	
+	public String returnStringMechanic(Mechanic mechanic){
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(mechanic.getFullName()).append(", Current work: ").append(mechanic.getCurrentOrder()).append("\n");
+		
+		return sb.toString();
 	}
 
 	public void sortByFullName() {
@@ -108,14 +116,31 @@ public class PersonalManager {
 		viewAll(sortedSet);
 	}
 
-//	public void sortMechanicsShowFreeFrirst() {
-//
-//		Set<Mechanic> sortedSet = new TreeSet<>(new MechanicWorkingStatusComparator());
-//
-//		for (Mechanic mechanic : this.mechanics) {
-//			sortedSet.add(mechanic);
-//		}
-//		
-//		viewAll(sortedSet);
-//	}
+	public Set<Mechanic> returnFreeMechanics() {
+
+		Set<Mechanic> freeMechanicsSet = new HashSet<>();
+
+		for (Mechanic mechanic : this.mechanics) {
+			
+			if (mechanic.getCurrentOrder() == null) {
+				freeMechanicsSet.add(mechanic);
+			}
+		}
+		
+		return (freeMechanicsSet.isEmpty()) ? null : freeMechanicsSet;
+	}
+	
+	public Mechanic getFreeMechanicFrom(Set<Mechanic> mechanics){
+		
+		if (mechanics != null){
+			Iterator<Mechanic> it = mechanics.iterator();
+			
+			return it.next();
+		} 			
+			final String MESSAGE = "No free Mechanics are aviable right now.";
+			System.out.println(MESSAGE);
+		
+		return null;
+		
+	}
 }

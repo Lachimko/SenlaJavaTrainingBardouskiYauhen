@@ -7,12 +7,7 @@ public class Order {
 	private Mechanic mechanic;
 	private WorkPlace workPlace;
 	private Task task;
-//	private String toDo;
-//	private Date requestDate;
-//	private Date startDate;
-//	private Date completeDate;
-//	private double price;
-	private OrderStatus orderStatus;
+	private OrderStatus orderStatus = OrderStatus.InProgress;
 	
 	public Order(Mechanic mechanic, WorkPlace workPlace, Task task) {
 		this.mechanic = mechanic;
@@ -55,10 +50,5 @@ public class Order {
 	public void setTask(Task task) {
 		this.task = task;
 	}
-	
-	
-	
-	
-
 	
 }

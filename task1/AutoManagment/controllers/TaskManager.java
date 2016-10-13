@@ -11,12 +11,9 @@ public class TaskManager {
 	private TaskManager() {
 	}
 
-	public static TaskManager getInstance() {
-
-		if (instance == null) {
-			return instance = new TaskManager();
-		}
-		return instance;
+	public void setCurrentTask(Task currentTask) {
+		
+		this.currentTask = currentTask == null ? null : currentTask;
 	}
 
 	public Task createTask(String toDo, String startDate, String completeDate, double price) {
@@ -28,6 +25,14 @@ public class TaskManager {
 		this.currentTask = currentTask;
 
 		return currentTask;
+	}
+
+	public static TaskManager getInstance() {
+
+		if (instance == null) {
+			return instance = new TaskManager();
+		}
+		return instance;
 	}
 
 	public void viewTask() {
@@ -43,8 +48,9 @@ public class TaskManager {
 			sb.append(" Price: ").append(currentTask.getPrice()).append("\n");
 
 			System.out.println(sb);
+		} else {
+			System.out.println("No current task");
 		}
-		System.out.println("No current task");
 	}
 
 }
