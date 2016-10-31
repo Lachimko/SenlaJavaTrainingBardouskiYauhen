@@ -1,0 +1,5 @@
+Order/id=1;mechanic=id=1;workPlace=id=1;task=Task/toDo=Test task1;requestDate=Fri Oct 21 01:49:01 MSK 2016;startDate=Thu Oct 20 00:00:00 MSK 2016;completeDate=Wed Oct 26 00:00:00 MSK 2016;price=48.5;;orderStatus=INPROGRESS;
+Order/id=2;mechanic=id=2;workPlace=id=1;task=Task/toDo=Test task2;requestDate=Fri Oct 21 01:49:01 MSK 2016;startDate=Tue Oct 25 00:00:00 MSK 2016;completeDate=Thu Oct 27 00:00:00 MSK 2016;price=15.25;;orderStatus=INPROGRESS;
+Mechanic/id=1;fullName=fullName;currentOrder=1;
+Mechanic/id=2;fullName=FirstAdded;currentOrder=2;
+Mechanic/id=3;fullName=SecondAdded;currentOrder=null;
