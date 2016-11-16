@@ -1,2 +1,0 @@
-1.Переделан propertyHolder
-2.сделан import/export csv
