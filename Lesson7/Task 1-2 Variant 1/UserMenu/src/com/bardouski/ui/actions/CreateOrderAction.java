@@ -3,18 +3,21 @@ package com.bardouski.ui.actions;
 import java.text.ParseException;
 
 import com.bardouski.program.exceptions.EmptyCollectionException;
-import com.bardouski.program.facade.Facade;
+import com.bardouski.program.facade.IFacade;
+import com.bardouski.program.model.IOrder;
+import com.bardouski.program.model.ITask;
 import com.bardouski.program.model.Mechanic;
 import com.bardouski.program.model.Order;
 import com.bardouski.program.model.Task;
 import com.bardouski.program.model.WorkPlace;
+import com.bardouski.propertiesholder.PropertiesContext;
 import com.bardouski.ui.actions.parents.FacadeInputAction;
 
 public class CreateOrderAction extends FacadeInputAction{
 
 	private static final String PARSED_WITH_ERRORS = "Date was parsed with errors.";
 
-	public CreateOrderAction(Facade facade) {
+	public CreateOrderAction(IFacade facade) {
 		super(facade);
 	}
 
@@ -31,15 +34,24 @@ public class CreateOrderAction extends FacadeInputAction{
 		double price = scanner.nextDouble();
 		
 		try {
-			Task task = new Task(toDo, scanner.parseTodayDate(), scanner.parseDate(startDate), scanner.parseDate(completeDate), price);
-			Mechanic freeMechanic = facade.findFreeMechanic();
-			WorkPlace freeWorkPlace = facade.findFreePlace();
-			
-			Order order = new Order(freeMechanic, freeWorkPlace, task);
-			
-			facade.addOrder(order);
-			freeMechanic.setCurrentOrder(order);
-			freeWorkPlace.setOrder(order);
+			Task task;
+			try {
+				task = (Task) PropertiesContext.getInstance(ITask.class);
+				task.setToDo(toDo);
+				task.setRequestDate(scanner.parseTodayDate());
+				task.setStartDate(scanner.parseDate(startDate));
+				task.setCompleteDate(scanner.parseDate(completeDate));
+				task.setPrice(price);
+				Mechanic freeMechanic = facade.findFreeMechanic();
+				WorkPlace freeWorkPlace = facade.findFreePlace();
+				
+				Order order = (Order) PropertiesContext.getInstance(IOrder.class);
+				order.setMechanic(freeMechanic);
+				order.setWorkPlace(freeWorkPlace);
+				order.setTask(task);
+			} catch (ClassNotFoundException e) {
+				logger.error(e.getMessage());
+			}
 			
 		} catch (ParseException e) {
 			printer.printFail(PARSED_WITH_ERRORS);

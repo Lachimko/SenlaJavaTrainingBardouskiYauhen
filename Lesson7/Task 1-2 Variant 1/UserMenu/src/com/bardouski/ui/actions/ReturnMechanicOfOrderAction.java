@@ -1,7 +1,7 @@
 package com.bardouski.ui.actions;
 
 import com.bardouski.program.exceptions.NoSuchObjectException;
-import com.bardouski.program.facade.Facade;
+import com.bardouski.program.facade.IFacade;
 import com.bardouski.program.model.Order;
 import com.bardouski.ui.actions.parents.FacadeInputAction;
 
@@ -9,7 +9,7 @@ public class ReturnMechanicOfOrderAction extends FacadeInputAction {
 
 	private static final String MESSAGE = "Order Id: ";
 
-	public ReturnMechanicOfOrderAction(Facade facade) {
+	public ReturnMechanicOfOrderAction(IFacade facade) {
 		super(facade);
 	}
 

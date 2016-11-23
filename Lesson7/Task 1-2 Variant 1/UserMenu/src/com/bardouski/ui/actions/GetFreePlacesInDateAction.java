@@ -3,7 +3,7 @@ package com.bardouski.ui.actions;
 import java.text.ParseException;
 import java.util.List;
 
-import com.bardouski.program.facade.Facade;
+import com.bardouski.program.facade.IFacade;
 import com.bardouski.program.model.WorkPlace;
 import com.bardouski.ui.actions.parents.FacadeInputAction;
 
@@ -12,7 +12,7 @@ public class GetFreePlacesInDateAction extends FacadeInputAction {
 	private static final String PARSE_ERROR = "Parse Error";
 	private static final String INPUT_DATE = "Input Date:";
 
-	public GetFreePlacesInDateAction(Facade facade) {
+	public GetFreePlacesInDateAction(IFacade facade) {
 		super(facade);
 	}
 

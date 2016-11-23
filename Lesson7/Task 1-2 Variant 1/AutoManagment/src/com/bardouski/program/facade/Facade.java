@@ -1,47 +1,30 @@
 package com.bardouski.program.facade;
 
-import java.io.FileNotFoundException;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.bardouski.program.controllers.services.*;
-import com.bardouski.program.dbprocessor.DBProcessor;
 import com.bardouski.program.dbprocessor.serializator.FacadeResultContainer;
 import com.bardouski.program.exceptions.*;
 import com.bardouski.program.model.*;
 import com.bardouski.program.model.enums.OrderStatus;
+import com.bardouski.propertiesholder.PropertiesContext;
 
 public class Facade implements IFacade {
-
-	private static final String NO_DB_FILE = "DB File did not find";
-
-	private Logger logger = Logger.getLogger(Facade.class.getSimpleName());
 
 	private IMechanicService mechanicService;
 	private IWorkPlaceService workPlaceService;
 	private IOrderService orderService;
 
 	/* Constructors */
-	public Facade(String DbPath, String DbCSVPath) {
+	public Facade() throws ClassNotFoundException {
 
-		DBProcessor dbProcessor;
-		try {
-			dbProcessor = new DBProcessor(DbPath, DbCSVPath);
-			mechanicService = new MechanicService(dbProcessor);
-			workPlaceService = new WorkPlaceService(dbProcessor);
-			orderService = new OrderService(dbProcessor);
-		} catch (FileNotFoundException e) {
-			logger.fatal(NO_DB_FILE);
-		} catch (NoDBConnectionException e) {
-		}
+		mechanicService = (MechanicService) PropertiesContext.getInstance(IMechanicService.class);
+		workPlaceService = (WorkPlaceService) PropertiesContext.getInstance(IWorkPlaceService.class);
+		orderService = (OrderService) PropertiesContext.getInstance(IOrderService.class);
 	}
-	
-	public Facade() {
-	}
-	
+
 	/* END Constructors */
 
 	public void setMechanicService(IMechanicService mechanicService) {

@@ -7,6 +7,7 @@ import java.util.List;
 import com.bardouski.program.controllers.services.IMechanicService;
 import com.bardouski.program.controllers.services.IOrderService;
 import com.bardouski.program.controllers.services.IWorkPlaceService;
+import com.bardouski.program.exceptions.EmptyCollectionException;
 import com.bardouski.program.exceptions.NoSuchObjectException;
 import com.bardouski.program.model.Garage;
 import com.bardouski.program.model.Mechanic;
@@ -33,7 +34,7 @@ public interface IFacade {
 	 * @throws Exception
 	 *             - if no such object with inputed id in collection
 	 */
-	Mechanic getMechanic(int id) throws Exception;
+	Mechanic getMechanic(int id) throws NoSuchObjectException;
 
 	/** Return collection of all mechanics from MechanicStore collection */
 	List<Mechanic> getAllMechanics();
@@ -60,7 +61,7 @@ public interface IFacade {
 	 * @throws Exception
 	 *             - if no such object with inputed id in collection
 	 */
-	Garage getGarage(int id) throws Exception;
+	Garage getGarage(int id) throws NoSuchObjectException;
 
 	/** Create a WorkPlace in Garage, send in parameter garage */
 	void addWorkPlaceInGarage(Garage garage);
@@ -69,7 +70,7 @@ public interface IFacade {
 	boolean removeWorkPlaceInGarage(Garage garage, int workPlaceId);
 
 	/** return first WorkPlace with null order */
-	WorkPlace findFreePlace() throws Exception;
+	WorkPlace findFreePlace() throws EmptyCollectionException;
 
 	/** Return WorkPlace with null Order field */
 	List<WorkPlace> getFreePlacesInDate(Date date);
@@ -80,7 +81,7 @@ public interface IFacade {
 	 * @throws Exception
 	 *             - if no such object was in collection
 	 */
-	Order getOrder(int orderId) throws Exception;
+	Order getOrder(int orderId) throws NoSuchObjectException;
 
 	/** Return new unique Id from OrderStore. Use for getting clone */
 	int getNextOrderId();
@@ -94,7 +95,7 @@ public interface IFacade {
 	 * @throws Exception
 	 *             - if collection was not affected
 	 */
-	void removeOrder(Order order) throws Exception;
+	void removeOrder(Order order) throws NoSuchObjectException;
 
 	/** Rewrite dates to inputed days forward */
 	void replaceDatesOfOrdersFrom(Order order, int howManyDays);

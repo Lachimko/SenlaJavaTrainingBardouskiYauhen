@@ -1,5 +1,6 @@
 package com.bardouski.program.controllers.stores;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -9,43 +10,43 @@ import java.util.List;
 
 import com.bardouski.program.comparators.OrderIdComparator;
 import com.bardouski.program.comparators.OrderStartDateComparator;
-import com.bardouski.program.dbprocessor.DBProcessor;
+import com.bardouski.program.exceptions.NoDBConnectionException;
 import com.bardouski.program.exceptions.NoSuchObjectException;
 import com.bardouski.program.model.Garage;
 import com.bardouski.program.model.Order;
 import com.bardouski.program.model.WorkPlace;
 import com.bardouski.program.model.enums.OrderStatus;
 
-public class OrderStore extends Store implements IOrderStore{
+public class OrderStore extends Store implements IOrderStore {
 
 	private int nextId;
 	private List<Order> orders;
 
 	// Constructors, Getters/Setters
-	public OrderStore(DBProcessor dbProcessor) {
+	public OrderStore() throws NoDBConnectionException, FileNotFoundException, ClassNotFoundException {
 
-		if (Store.dbProcessor == null) {
-			Store.dbProcessor = dbProcessor;
+		if (Store.dbProcessor != null) {
+			orders = dbProcessor.getOrdersDB();
+			nextId = getIdCounterOfOrderStore();
 		}
-		
-		orders = dbProcessor.getOrdersDB();
+	}
+
+	/** Return correct id after processing mechanic list */
+	private int getIdCounterOfOrderStore() {
 
 		if (!orders.isEmpty()) {
 			List<Order> sortedList = new ArrayList<>(orders);
 			Collections.sort(sortedList, new OrderIdComparator());
-			nextId = (sortedList.get(0).getId()) + 1;
+			return (sortedList.get(0).getId()) + 1;
 		} else {
-			nextId = 1;
+			return 1;
 		}
 	}
-	
-	public OrderStore(){
-	}
-	
+
 	public List<Order> getOrders() {
 		return orders;
 	}
-	
+
 	public int getNextId() {
 		return nextId;
 	}
@@ -161,12 +162,13 @@ public class OrderStore extends Store implements IOrderStore{
 
 		for (Garage garage : garages) {
 			for (WorkPlace workPlace : garage.getWorkPlaces()) {
+				
 
 				if (workPlace.getOrder() == null) {
 					list.add(workPlace);
 				} else if (workPlace.getOrder().getTask().getCompleteDate().before(date)
 						&& workPlace.getOrder().getTask().getStartDate().after(date)) {
-					list.add(workPlace);
+					list.add( workPlace);
 				}
 			}
 		}

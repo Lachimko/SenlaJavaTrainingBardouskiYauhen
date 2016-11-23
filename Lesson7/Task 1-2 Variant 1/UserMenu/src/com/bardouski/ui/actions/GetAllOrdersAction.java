@@ -1,11 +1,11 @@
 package com.bardouski.ui.actions;
 
-import com.bardouski.program.facade.Facade;
+import com.bardouski.program.facade.IFacade;
 import com.bardouski.ui.actions.parents.FacadeAction;
 
 public class GetAllOrdersAction extends FacadeAction{
 
-	public GetAllOrdersAction(Facade facade) {
+	public GetAllOrdersAction(IFacade facade) {
 		super(facade);
 	}
 

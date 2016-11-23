@@ -3,7 +3,7 @@ package com.bardouski.ui.actions;
 import org.apache.log4j.Logger;
 
 import com.bardouski.program.exceptions.NoSuchObjectException;
-import com.bardouski.program.facade.Facade;
+import com.bardouski.program.facade.IFacade;
 import com.bardouski.program.model.Order;
 import com.bardouski.program.model.enums.OrderStatus;
 import com.bardouski.ui.actions.parents.FacadeInputAction;
@@ -12,7 +12,7 @@ public class CancelOrderAction extends FacadeInputAction{
 
 	private static final String ORDER_ID = "Order Id to cancel:";
 
-	public CancelOrderAction(Facade facade) {
+	public CancelOrderAction(IFacade facade) {
 		super(facade);
 	}
 

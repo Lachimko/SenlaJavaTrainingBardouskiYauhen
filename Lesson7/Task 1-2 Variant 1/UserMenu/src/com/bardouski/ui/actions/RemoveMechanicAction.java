@@ -1,7 +1,7 @@
 package com.bardouski.ui.actions;
 
 import com.bardouski.program.exceptions.NoSuchObjectException;
-import com.bardouski.program.facade.Facade;
+import com.bardouski.program.facade.IFacade;
 import com.bardouski.program.model.Mechanic;
 import com.bardouski.ui.actions.parents.FacadeInputAction;
 
@@ -9,7 +9,7 @@ public class RemoveMechanicAction extends FacadeInputAction {
 
 	private static final String MESSAGE = "Enter Mechnanic's ID to remove: ";
 	
-	public RemoveMechanicAction(Facade facade) {
+	public RemoveMechanicAction(IFacade facade) {
 		super(facade);
 	}
 	

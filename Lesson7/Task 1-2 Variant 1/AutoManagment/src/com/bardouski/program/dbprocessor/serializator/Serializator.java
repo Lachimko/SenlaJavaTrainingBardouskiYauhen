@@ -29,21 +29,11 @@ public class Serializator implements ISerializer {
 	public Serializator(){
 	}
 	
-	public Serializator(String dbPath) throws FileNotFoundException {
-		
-		this.dbPath = dbPath;
-
-		if (!(new File(dbPath)).exists()) {
-			logger.fatal(NO_DB_FILE);
-			throw new FileNotFoundException();
-		}
-	}
-
 	@Override
 	public void setPath(String path) throws FileNotFoundException {
 
 		if (!(new File(path)).exists()) {
-			logger.fatal(NO_DB_FILE);
+			logger.error(NO_DB_FILE);
 			throw new FileNotFoundException();
 		}
 

@@ -2,20 +2,23 @@ package com.bardouski.ui.menuprocessor;
 
 import java.util.List;
 
-import com.bardouski.ui.menuelements.MenuElement;
+import com.bardouski.ui.menuelements.IMenu;
 import com.bardouski.ui.printer.SysoutPrinter;
 import com.bardouski.ui.scanner.MultiScanner;
 
-public class MenuProcessor {
+public class MenuProcessor implements IMenuProcessor{
 
 	private static final String CHOOSE_NEED_POINT_FROM = "Choose need point from: ->";
 	private static final String WRONG_VALUE = "WRONG VALUE";
-	private MenuElement root;
-	private MenuElement current;
+	private IMenu root;
+	private IMenu current;
 	private MultiScanner scanner = new MultiScanner();
 	private SysoutPrinter printer = new SysoutPrinter();
 
-	public MenuProcessor(MenuElement root) {
+	public MenuProcessor(){
+	}
+
+	public void setRoot(IMenu root) {
 		this.root = root;
 		this.current = root;
 	}
@@ -26,7 +29,7 @@ public class MenuProcessor {
 	 */
 	public void process() {
 
-		List<MenuElement> currentListWithChildMenus;
+		List<IMenu> currentListWithChildMenus;
 
 		while (true) {
 
@@ -43,7 +46,7 @@ public class MenuProcessor {
 					printer.printFail(WRONG_VALUE);
 
 				} else {
-					MenuElement currentMenuElement = currentListWithChildMenus.get(i);
+					IMenu currentMenuElement = currentListWithChildMenus.get(i);
 
 					if (currentMenuElement.getAction() != null) {
 						currentMenuElement.getAction().execute();
@@ -73,12 +76,12 @@ public class MenuProcessor {
 	}
 
 	/**Build String with all elem's children menus*/
-	private String printChilds(MenuElement elem) {
+	private String printChilds(IMenu elem) {
 
 		StringBuilder sb = new StringBuilder();
 		int i = 0;
 
-		for (MenuElement menuElement : elem.getItems()) {
+		for (IMenu menuElement : elem.getItems()) {
 			sb.append(i++).append(". ").append(menuElement.getCaption()).append("\n");
 		}
 

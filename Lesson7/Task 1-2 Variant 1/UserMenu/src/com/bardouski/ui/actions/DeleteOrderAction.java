@@ -1,8 +1,7 @@
 package com.bardouski.ui.actions;
 
-import com.bardouski.config.AutoManagmentPropertiesHolder;
 import com.bardouski.program.exceptions.NoSuchObjectException;
-import com.bardouski.program.facade.Facade;
+import com.bardouski.program.facade.IFacade;
 import com.bardouski.program.model.Order;
 import com.bardouski.program.model.enums.OrderStatus;
 import com.bardouski.ui.actions.parents.FacadePermissionInputAction;
@@ -11,14 +10,14 @@ public class DeleteOrderAction extends FacadePermissionInputAction {
 
 	private static final String ORDER_ID = "Order Id to delete:";
 
-	public DeleteOrderAction(Facade facade, AutoManagmentPropertiesHolder propertiesHolder) {
-		super(facade, propertiesHolder);
+	public DeleteOrderAction(IFacade facade, String propertyValue) {
+		super(facade, propertyValue);
 	}
 	
 	@Override
 	public void execute() {
 		
-		if (propertiesHolder.isRemoveOrder() == true){
+		if (permission){
 			
 			printer.print(ORDER_ID);
 			try {

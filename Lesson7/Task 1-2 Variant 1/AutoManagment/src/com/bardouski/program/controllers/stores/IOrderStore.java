@@ -10,7 +10,7 @@ import com.bardouski.program.model.Order;
 import com.bardouski.program.model.WorkPlace;
 import com.bardouski.program.model.enums.OrderStatus;
 
-public interface IOrderStore {
+public interface IOrderStore extends IStore{
 
 	List<Order> getOrders();
 

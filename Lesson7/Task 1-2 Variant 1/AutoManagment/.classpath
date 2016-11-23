@@ -5,5 +5,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="libs/log4j-1.2.17.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Annotations"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DI"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Configuration"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

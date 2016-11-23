@@ -1,21 +1,30 @@
 package com.bardouski.ui.main;
 
-import com.bardouski.config.AutoManagmentPropertiesHolder;
-import com.bardouski.config.AutoManagmentPropertiesLoader;
+import com.bardouski.config.ProgramProps;
 import com.bardouski.program.facade.Facade;
+import com.bardouski.program.facade.IFacade;
+import com.bardouski.propertiesholder.PropertiesContext;
+import com.bardouski.ui.menuprocessor.IMenuBuilder;
+import com.bardouski.ui.menuprocessor.IMenuProcessor;
 import com.bardouski.ui.menuprocessor.MenuBuilder;
 import com.bardouski.ui.menuprocessor.MenuProcessor;
 
 public class Main {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception {
 		
-		AutoManagmentPropertiesLoader.loadPropertiesPath("resources\\config.properties");
-		AutoManagmentPropertiesHolder propertiesHolder = AutoManagmentPropertiesLoader.getProperties();
+		ProgramProps.loadPropertiesByPath("resources\\config.properties");
+		PropertiesContext context = new PropertiesContext("resources\\context.properties");
 		
-		Facade facade = new Facade(propertiesHolder.getDbPath(), propertiesHolder.getDbCSVPath());
-		MenuBuilder builder = new MenuBuilder(facade, propertiesHolder);
-		MenuProcessor menuProcessor = new MenuProcessor(builder.buildMenu());
+		IFacade facade = (Facade) PropertiesContext.getInstance(IFacade.class);
+		
+		IMenuBuilder builder = (MenuBuilder) PropertiesContext.getInstance(IMenuBuilder.class);
+		builder.setFacade(facade);
+		
+		MenuProcessor menuProcessor = (MenuProcessor) PropertiesContext.getInstance(IMenuProcessor.class);
+		menuProcessor.setRoot(builder.buildMenu());
+		
 		menuProcessor.process();
 		
 	}

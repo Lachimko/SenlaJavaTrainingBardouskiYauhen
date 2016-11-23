@@ -7,7 +7,7 @@ import com.bardouski.program.exceptions.NoSuchObjectException;
 import com.bardouski.program.model.Garage;
 import com.bardouski.program.model.WorkPlace;
 
-public interface IWorkPlaceStore {
+public interface IWorkPlaceStore extends IStore{
 
 	List<Garage> getGarages();
 

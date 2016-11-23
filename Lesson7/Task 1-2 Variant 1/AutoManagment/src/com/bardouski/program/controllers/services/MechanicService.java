@@ -2,21 +2,20 @@ package com.bardouski.program.controllers.services;
 
 import java.util.List;
 
+import com.bardouski.program.controllers.stores.IMechanicStore;
 import com.bardouski.program.controllers.stores.MechanicStore;
-import com.bardouski.program.dbprocessor.DBProcessor;
 import com.bardouski.program.exceptions.*;
 import com.bardouski.program.model.Mechanic;
+import com.bardouski.propertiesholder.PropertiesContext;
 
 public class MechanicService implements IMechanicService{
 
-	private MechanicStore mechanicStore;
+	private IMechanicStore mechanicStore;
 
 	// Constructors & Getters/Setters
-	public MechanicService(DBProcessor dbProcessor) {
-		this.mechanicStore = new MechanicStore(dbProcessor);
-	}
-	
-	public MechanicService(){
+
+	public MechanicService() throws ClassNotFoundException{
+		this.mechanicStore = (MechanicStore) PropertiesContext.getInstance(IMechanicStore.class);
 	}
 	// END Constructors & Getters/Setters
 

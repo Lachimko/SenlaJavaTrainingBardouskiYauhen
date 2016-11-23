@@ -1,17 +1,16 @@
 package com.bardouski.ui.actions.parents;
 
-import com.bardouski.config.AutoManagmentPropertiesHolder;
-import com.bardouski.program.facade.Facade;
+import com.bardouski.program.facade.IFacade;
 
 public abstract class FacadePermissionInputAction extends FacadeInputAction{
 
-	protected AutoManagmentPropertiesHolder propertiesHolder;
+	protected boolean permission;
 	protected static final String NO_PERMISSIONS = "No permissions";
 	
-	public FacadePermissionInputAction(Facade facade, AutoManagmentPropertiesHolder propertiesHolder) {
+	public FacadePermissionInputAction(IFacade facade, String propertyValue) {
 		super(facade);
 		
-		this.propertiesHolder = propertiesHolder;
+		permission = Boolean.getBoolean(propertyValue);
 	}
 	
 }
