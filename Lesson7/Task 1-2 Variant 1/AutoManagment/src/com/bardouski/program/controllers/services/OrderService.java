@@ -4,25 +4,24 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import com.bardouski.program.controllers.stores.IOrderStore;
 import com.bardouski.program.controllers.stores.OrderStore;
-import com.bardouski.program.dbprocessor.DBProcessor;
-import com.bardouski.program.dbprocessor.serializator.FacadeResultContainer;
+import com.bardouski.program.dbprocessor.serializator.IResultContainer;
 import com.bardouski.program.exceptions.NoSuchObjectException;
 import com.bardouski.program.model.Garage;
 import com.bardouski.program.model.Order;
 import com.bardouski.program.model.WorkPlace;
 import com.bardouski.program.model.enums.OrderStatus;
+import com.bardouski.propertiesholder.PropertiesContext;
 
 public class OrderService implements IOrderService{
 
-	private OrderStore orderStore;
+	private IOrderStore orderStore;
 
 	//Constructors
-	public OrderService(DBProcessor dbProcessor) {
-		orderStore = new OrderStore(dbProcessor);
-	}
-	
-	public OrderService(){
+
+	public OrderService() throws ClassNotFoundException{
+		orderStore = (OrderStore) PropertiesContext.getInstance(IOrderStore.class);
 	}
 	//END Constructors
 	
@@ -58,9 +57,8 @@ public class OrderService implements IOrderService{
 		return orderStore.getFreePlacesInDate(date, garages);
 	}
 
-	public void saveToFile(FacadeResultContainer resultContainer) {
+	public void saveToFile(IResultContainer resultContainer) {
 		orderStore.saveToFile(resultContainer);
-		//orderStore.saveToFile(mechanics, orders, garages);
 	}
 
 	/**Return new unique Id from OrderStore. Use for getting clone*/

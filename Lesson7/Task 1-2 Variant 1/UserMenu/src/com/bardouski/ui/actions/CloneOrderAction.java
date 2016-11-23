@@ -3,7 +3,7 @@ package com.bardouski.ui.actions;
 import org.apache.log4j.Logger;
 
 import com.bardouski.program.exceptions.NoSuchObjectException;
-import com.bardouski.program.facade.Facade;
+import com.bardouski.program.facade.IFacade;
 import com.bardouski.program.model.Order;
 import com.bardouski.ui.actions.parents.FacadeInputAction;
 
@@ -15,7 +15,7 @@ public class CloneOrderAction extends FacadeInputAction {
 
 	private static final String INPUT_ORDER_ID = "Order Id to clone:";
 
-	public CloneOrderAction(Facade facade) {
+	public CloneOrderAction(IFacade facade) {
 		super(facade);
 	}
 

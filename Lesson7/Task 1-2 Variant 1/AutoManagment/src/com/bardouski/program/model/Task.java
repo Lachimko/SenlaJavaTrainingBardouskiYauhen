@@ -7,7 +7,7 @@ import com.bardouski.annotationtask.annotations.Printable;
 import com.bardouski.annotationtask.annotations.PrintableObject;
 
 @PrintableObject(name = "Task")
-public class Task implements Serializable {
+public class Task implements Serializable, ITask {
 
 	private static final long serialVersionUID = 4735856939575291114L;
 

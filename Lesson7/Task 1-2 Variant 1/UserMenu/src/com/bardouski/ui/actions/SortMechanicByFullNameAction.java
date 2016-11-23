@@ -2,7 +2,7 @@ package com.bardouski.ui.actions;
 
 import java.util.List;
 
-import com.bardouski.program.facade.Facade;
+import com.bardouski.program.facade.IFacade;
 import com.bardouski.program.model.Mechanic;
 import com.bardouski.ui.actions.parents.FacadeInputAction;
 
@@ -10,7 +10,7 @@ public class SortMechanicByFullNameAction extends FacadeInputAction {
 
 	private static final String EMPTY_COLLECTION = "Empty Collection";
 
-	public SortMechanicByFullNameAction(Facade facade) {
+	public SortMechanicByFullNameAction(IFacade facade) {
 		super(facade);
 	}
 

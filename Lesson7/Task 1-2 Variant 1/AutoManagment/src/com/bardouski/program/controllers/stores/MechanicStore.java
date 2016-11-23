@@ -1,12 +1,13 @@
 package com.bardouski.program.controllers.stores;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import com.bardouski.program.comparators.MechanicFullNameComparator;
 import com.bardouski.program.comparators.MechanicIdComparator;
-import com.bardouski.program.dbprocessor.DBProcessor;
+import com.bardouski.program.exceptions.NoDBConnectionException;
 import com.bardouski.program.exceptions.NoSuchObjectException;
 import com.bardouski.program.model.Mechanic;
 
@@ -16,26 +17,26 @@ public class MechanicStore extends Store implements IMechanicStore {
 	private List<Mechanic> mechanics;
 
 	// Constructors, Getters/Setters
-	public MechanicStore(DBProcessor dbProcessor) {
+	public MechanicStore() throws NoDBConnectionException, FileNotFoundException, ClassNotFoundException {
 
-		if (Store.dbProcessor == null) {
-			Store.dbProcessor = dbProcessor;
+		if (Store.dbProcessor != null) {
+			mechanics = dbProcessor.getMechanicsDB();
+			nextId = getIdCounterOfMechanicStore();
 		}
+	}
 
-		mechanics = dbProcessor.getMechanicsDB();
-
+	/** Return correct id after processing mechanic list*/
+	private int getIdCounterOfMechanicStore(){
+		
 		if (!mechanics.isEmpty()) {
 			List<Mechanic> sortedList = new ArrayList<>(mechanics);
 			Collections.sort(sortedList, new MechanicIdComparator());
-			nextId = (sortedList.get(0).getId()) + 1;
+			return (sortedList.get(0).getId()) + 1;
 		} else {
-			nextId = 1;
+			return 1;
 		}
 	}
-
-	public MechanicStore(){
-	}
-	
+		
 	public List<Mechanic> getMechanics() {
 		return this.mechanics;
 	}
@@ -126,13 +127,13 @@ public class MechanicStore extends Store implements IMechanicStore {
 	 * not returns from this method and set to any collection.
 	 */
 	public void importMechnaics() {
-		
+
 		List<Mechanic> imported = importFromCSV();
-		
+
 		for (Mechanic mechanic : imported) {
-			
+
 			for (Mechanic storeMechanic : mechanics) {
-				if (storeMechanic.getId() == mechanic.getId()){
+				if (storeMechanic.getId() == mechanic.getId()) {
 					storeMechanic.setFullName(mechanic.getFullName());
 					continue;
 				}

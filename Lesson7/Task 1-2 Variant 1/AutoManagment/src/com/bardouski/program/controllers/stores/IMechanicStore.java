@@ -5,7 +5,7 @@ import java.util.List;
 import com.bardouski.program.exceptions.NoSuchObjectException;
 import com.bardouski.program.model.Mechanic;
 
-public interface IMechanicStore {
+public interface IMechanicStore extends IStore {
 
 	List<Mechanic> getMechanics();
 

@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-import com.bardouski.program.dbprocessor.serializator.FacadeResultContainer;
+import com.bardouski.program.dbprocessor.serializator.IResultContainer;
 import com.bardouski.program.exceptions.NoSuchObjectException;
 import com.bardouski.program.model.Garage;
 import com.bardouski.program.model.Order;
@@ -29,7 +29,7 @@ public interface IOrderService {
 
 	List<WorkPlace> getFreePlacesInDate(Date date, List<Garage> garages);
 
-	void saveToFile(FacadeResultContainer resultContainer);
+	void saveToFile(IResultContainer resultContainer);
 
 	/**Return new unique Id from OrderStore. Use for getting clone*/
 	int getNextOrderId();

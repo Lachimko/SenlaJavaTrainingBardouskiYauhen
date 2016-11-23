@@ -1,8 +1,7 @@
 package com.bardouski.ui.actions;
 
-import com.bardouski.config.AutoManagmentPropertiesHolder;
 import com.bardouski.program.exceptions.NoSuchObjectException;
-import com.bardouski.program.facade.Facade;
+import com.bardouski.program.facade.IFacade;
 import com.bardouski.program.model.Garage;
 import com.bardouski.ui.actions.parents.FacadePermissionInputAction;
 
@@ -12,14 +11,14 @@ public class RemoveWorkPlaceInGarageAction extends FacadePermissionInputAction {
 	private static final String MESSAGE_WORKPLACE = "ID of Workplace to remove: ";
 	private static final String MESSAGE_GARAGE = "ID of Garage in which remove: ";
 	
-	public RemoveWorkPlaceInGarageAction(Facade facade, AutoManagmentPropertiesHolder propertiesHolder) {
-		super(facade, propertiesHolder);
+	public RemoveWorkPlaceInGarageAction(IFacade facade, String propertyValue) {
+		super(facade, propertyValue);
 	}
 	
 	@Override
 	public void execute() {
 		
-		if (propertiesHolder.isAddRemoveWorkplace() == true){
+		if (permission){
 			
 			printer.print(MESSAGE_GARAGE);
 			int garID = scanner.nextInt();

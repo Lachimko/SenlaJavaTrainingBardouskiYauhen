@@ -7,10 +7,10 @@ import com.bardouski.annotationtask.annotations.PrintableObject;
 import com.bardouski.annotationtask.annotations.PrintableRef;
 
 @PrintableObject(name = "Mechanic")
-public class Mechanic implements Serializable{
+public class Mechanic implements Serializable, IMechanic {
 
 	private static final long serialVersionUID = -1256372256008341555L;
-	
+
 	@Printable(name = "mechanicID", isDetailedOnly = false, order = 0)
 	private int id;
 	@Printable(name = "mechanicFullName", isDetailedOnly = false, order = 1)
@@ -21,10 +21,10 @@ public class Mechanic implements Serializable{
 	public Mechanic(String fullName) {
 		this.fullName = fullName;
 	}
-	
-	public Mechanic(){
+
+	public Mechanic() {
 	}
-	
+
 	public String getFullName() {
 		return fullName;
 	}
@@ -33,18 +33,18 @@ public class Mechanic implements Serializable{
 		this.fullName = fullName;
 	}
 
-	public Order getCurrentOrder() {
+	public IOrder getCurrentOrder() {
 		return currentOrder;
 	}
 
-	public void setCurrentOrder(Order currentOrder) {
-		this.currentOrder = currentOrder;
+	public void setCurrentOrder(IOrder currentOrder) {
+		this.currentOrder = (Order) currentOrder;
 	}
 
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}

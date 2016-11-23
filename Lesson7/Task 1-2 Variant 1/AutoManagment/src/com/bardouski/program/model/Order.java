@@ -8,7 +8,7 @@ import com.bardouski.annotationtask.annotations.PrintableRef;
 import com.bardouski.program.model.enums.OrderStatus;
 
 @PrintableObject(name = "Order")
-public class Order implements Serializable, Cloneable {
+public class Order implements Serializable, Cloneable, IOrder {
 
 	private static final long serialVersionUID = -6439747776065625336L;
 
@@ -52,24 +52,24 @@ public class Order implements Serializable, Cloneable {
 		return mechanic;
 	}
 
-	public void setMechanic(Mechanic mechanic) {
-		this.mechanic = mechanic;
+	public void setMechanic(IMechanic mechanic) {
+		this.mechanic = (Mechanic) mechanic;
 	}
 
 	public WorkPlace getWorkPlace() {
 		return workPlace;
 	}
 
-	public void setWorkPlace(WorkPlace workPlace) {
-		this.workPlace = workPlace;
+	public void setWorkPlace(IWorkPlace workPlace) {
+		this.workPlace = (WorkPlace) workPlace;
 	}
 
-	public Task getTask() {
+	public ITask getTask() {
 		return task;
 	}
 
-	public void setTask(Task task) {
-		this.task = task;
+	public void setTask(ITask task) {
+		this.task = (Task) task;
 	}
 
 	@Override

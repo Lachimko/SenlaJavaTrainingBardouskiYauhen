@@ -1,7 +1,6 @@
 package com.bardouski.program.dbprocessor;
 
 import java.io.FileNotFoundException;
-import java.nio.file.InvalidPathException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +11,7 @@ import com.bardouski.program.exceptions.NoDBConnectionException;
 import com.bardouski.program.model.Garage;
 import com.bardouski.program.model.Mechanic;
 import com.bardouski.program.model.Order;
+import com.bardouski.propertiesholder.PropertiesContext;
 
 /**
  * Deserialize all collections from DB and save them to local lists. That lists
@@ -26,23 +26,16 @@ public class DBProcessor implements IDBProcessor {
 	private IDBCSVProcessor dbcsvProcessor;
 
 	// Constructors, Getters/Setters
-	public DBProcessor(){
+	public DBProcessor() {
 	}
-	
-	public DBProcessor(String dbPath, String dbCSVPath) throws NoDBConnectionException, FileNotFoundException {
 
-		try {
-			serializator = new Serializator(dbPath);
-			getListsFromDB();
-			dbcsvProcessor = new DBCSVProcessor(dbCSVPath);
+	public DBProcessor(String dbPath, String dbCSVPath) throws NoDBConnectionException, FileNotFoundException, ClassNotFoundException {
 
-		} catch (FileNotFoundException e) {
-			try {
-				dbcsvProcessor = new DBCSVProcessor(dbCSVPath);
-			} catch (InvalidPathException e1) {
-				throw new NoDBConnectionException();
-			}
-		}
+		serializator = (Serializator) PropertiesContext.getInstance(ISerializer.class);
+		serializator.setPath(dbPath);
+		getListsFromDB();
+		dbcsvProcessor = (DBCSVProcessor) PropertiesContext.getInstance(IDBCSVProcessor.class);
+		dbcsvProcessor.setPath(dbCSVPath);
 	}
 
 	public void setSerializator(ISerializer serializator) {

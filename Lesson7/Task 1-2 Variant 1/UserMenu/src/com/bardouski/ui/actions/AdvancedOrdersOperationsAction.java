@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import com.bardouski.program.comparators.OrderCompleteDateComparator;
 import com.bardouski.program.comparators.OrderPriceComparator;
 import com.bardouski.program.comparators.OrderRequestDateComparator;
-import com.bardouski.program.facade.Facade;
+import com.bardouski.program.facade.IFacade;
 import com.bardouski.program.model.Order;
 import com.bardouski.program.model.enums.OrderStatus;
 import com.bardouski.ui.actions.parents.FacadeInputAction;
@@ -25,7 +25,7 @@ public class AdvancedOrdersOperationsAction extends FacadeInputAction {
 	private static final String ORDERS_PICKER = "1.Take Ready Orders\n2.Take Deleted Orders\n3.Take Cancelled Orders";
 	private static final String SORTING_PARAMETERS = "1.Sort by Request Date\n2.Sort by Complete Date\n3.Sort by Price";
 	
-	public AdvancedOrdersOperationsAction(Facade facade) {
+	public AdvancedOrdersOperationsAction(IFacade facade) {
 		super(facade);
 	}
 

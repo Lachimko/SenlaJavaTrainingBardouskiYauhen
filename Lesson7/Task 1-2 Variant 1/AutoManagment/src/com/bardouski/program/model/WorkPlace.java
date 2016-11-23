@@ -7,7 +7,7 @@ import com.bardouski.annotationtask.annotations.PrintableObject;
 import com.bardouski.annotationtask.annotations.PrintableRef;
 
 @PrintableObject(name = "WorkPlace")
-public class WorkPlace implements Serializable{
+public class WorkPlace implements IWorkPlace, Serializable{
 
 	private static final long serialVersionUID = -2823107008398216104L;
 
@@ -19,12 +19,12 @@ public class WorkPlace implements Serializable{
 	public WorkPlace(){
 	}
 	
-	public Order getOrder() {
+	public IOrder getOrder() {
 		return order;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrder(IOrder order) {
+		this.order = (Order) order;
 	}
 
 	public int getId() {

@@ -1,5 +1,6 @@
 package com.bardouski.program.controllers.stores;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -7,8 +8,8 @@ import java.util.List;
 
 import com.bardouski.program.comparators.GarageIdComparator;
 import com.bardouski.program.comparators.WorkPlaceIdComparator;
-import com.bardouski.program.dbprocessor.DBProcessor;
 import com.bardouski.program.exceptions.EmptyCollectionException;
+import com.bardouski.program.exceptions.NoDBConnectionException;
 import com.bardouski.program.exceptions.NoSuchObjectException;
 import com.bardouski.program.model.Garage;
 import com.bardouski.program.model.WorkPlace;
@@ -24,18 +25,21 @@ public class WorkPlaceStore extends Store implements IWorkPlaceStore {
 	 * Initialize dbProcessor, write garages by returned collection from DB,
 	 * calculate highest id from collections
 	 */
-	public WorkPlaceStore(DBProcessor dbProcessor) {
+	public WorkPlaceStore() throws NoDBConnectionException, FileNotFoundException, ClassNotFoundException {
 
-		if (Store.dbProcessor == null) {
-			Store.dbProcessor = dbProcessor;
+		if (Store.dbProcessor != null) {
+			garages = dbProcessor.getGaragesDB();
+			garageNextId = getIdCounterOfGarageOfWorkPlaceStore();
+			workPlaceNextId = getIdCounterOfWorkPlaceOfWorkPlaceStore();
 		}
 
-		garages = dbProcessor.getGaragesDB();
+	}
+	
+	/** Return correct id after processing list */
+	private int getIdCounterOfWorkPlaceOfWorkPlaceStore() {
 
 		if (!garages.isEmpty()) {
 			List<Garage> sortedList = new ArrayList<>(garages);
-			Collections.sort(sortedList, new GarageIdComparator());
-			garageNextId = (sortedList.get(0).getId()) + 1;
 
 			List<WorkPlace> placesList = new ArrayList<>();
 			int startIndex = 0;
@@ -44,14 +48,24 @@ public class WorkPlaceStore extends Store implements IWorkPlaceStore {
 				startIndex += garage.getWorkPlaces().size();
 			}
 			Collections.sort(placesList, new WorkPlaceIdComparator());
-			workPlaceNextId = (sortedList.get(0).getId()) + 1;
+			return (sortedList.get(0).getId()) + 1;
+			
 		} else {
-			garageNextId = 1;
-			workPlaceNextId = 1;
+			return 1;
 		}
 	}
 
-	public WorkPlaceStore() {
+	/** Return correct id after processing list */
+	private int getIdCounterOfGarageOfWorkPlaceStore() {
+
+		if (!garages.isEmpty()) {
+			List<Garage> sortedList = new ArrayList<>(garages);
+			Collections.sort(sortedList, new GarageIdComparator());
+			return (sortedList.get(0).getId()) + 1;
+
+		} else {
+			return 1;
+		}
 	}
 
 	public List<Garage> getGarages() {
