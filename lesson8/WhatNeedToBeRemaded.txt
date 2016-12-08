@@ -2,4 +2,4 @@
 ReqRespContainers > com.bardouski.responses.Responce
 
 2. Usage of Hanler:
-com.bardouski.sockets.ClientThread
+Server > com.bardouski.sockets.ClientThread
