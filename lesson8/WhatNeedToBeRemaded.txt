@@ -1,0 +1,7 @@
+1. Создать Request Handler для обработки Request'a.
+
+ReqRespContainers > com.bardouski.responses.Responce
+
+2. Usage of Hanler
+
+com.bardouski.sockets.ClientThread
