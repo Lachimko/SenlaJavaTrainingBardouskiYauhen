@@ -1,3 +1,3 @@
 use senla;
 #1
-select model, speed, hd from senla.laptop where price < 500;
+select model, speed, hd from pc where price < 500;
