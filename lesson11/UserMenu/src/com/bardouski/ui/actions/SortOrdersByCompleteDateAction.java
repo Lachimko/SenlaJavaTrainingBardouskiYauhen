@@ -3,8 +3,6 @@ package com.bardouski.ui.actions;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import com.bardouski.model.IOrder;
@@ -26,27 +24,19 @@ public class SortOrdersByCompleteDateAction extends FacadeAction {
 
 		List<IOrder> orders = null;
 		Response response;
-		
-		try {
-			out.writeObject(new Request("getAllOrders"));
-			
-			while ((response = (Response) in.readObject()) != null) {
-				
-				if ((orders = (List<IOrder>) response.getResponceResult()) != null){
-					
-					Collections.sort(orders, new Comparator<IOrder>() {
 
-						@Override
-						public int compare(IOrder o1, IOrder o2) {
-							return (o1.getTask().getCompleteDate().before(o1.getTask().getCompleteDate())) ? -1 : 1;
-						}
-					});
-					
+		try {
+			out.writeObject(new Request("SortOrdersByCompleteDateAction"));
+
+			while ((response = (Response) in.readObject()) != null) {
+
+				if ((orders = (List<IOrder>) response.getResponceResult()) != null) {
+
 					printer.print(orders);
 				} else {
 					printer.print(EMPTY_COLLECTION);
 				}
-				
+
 				break;
 			}
 		} catch (IOException | ClassNotFoundException e) {

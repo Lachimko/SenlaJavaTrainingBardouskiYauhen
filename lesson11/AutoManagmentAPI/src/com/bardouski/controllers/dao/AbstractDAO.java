@@ -1,4 +1,4 @@
-package com.bardouski.program.controllers.stores.dao;
+package com.bardouski.controllers.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,28 +18,28 @@ public abstract class AbstractDAO<T> {
 	protected static final String SQL_ERROR = "SQL Error";
 
 	/** Inject GetById sql string with DAO query */
-	public abstract String injectGetByIdQuery();
+	protected abstract String injectGetByIdQuery();
 
 	/** Inject Insert sql string with DAO query */
-	public abstract String injectInsertQuery();
+	protected abstract String injectInsertQuery();
 
 	/** Inject Delete sql string with DAO query */
-	public abstract String injectDeleteQuery();
+	protected abstract String injectDeleteQuery();
 
 	/** Inject GetAll sql string with DAO query */
-	public abstract String injectGetAllQuery();
+	protected abstract String injectGetAllQuery();
 
 	/** Inject update sql string with DAO query */
-	public abstract String injectUpdateQuery();
+	protected abstract String injectUpdateQuery();
 
 	/** Fill PreparedStatement by parameters 
 	 * @throws SQLException */
-	public abstract void prepareUpdateStatement(PreparedStatement statement, T object) throws SQLException;
+	protected abstract void prepareUpdateStatement(PreparedStatement statement, T object) throws SQLException;
 
-	public abstract void prepareInsertStatement(PreparedStatement statement, T object) throws SQLException;
+	protected abstract void prepareInsertStatement(PreparedStatement statement, T object) throws SQLException;
 	
 	/** Return ready instance with completed id field */
-	public abstract T parseEntity(ResultSet resultSet);
+	protected abstract T parseEntity(ResultSet resultSet);
 
 	public T getById(Connection connection, int id) {
 
@@ -60,7 +60,7 @@ public abstract class AbstractDAO<T> {
 			try {
 				statement.close();
 			} catch (SQLException e) {
-				logger.error(e.getMessage(), e);
+				logger.error(SQL_ERROR, e);
 			}
 		}
 	}
@@ -79,7 +79,7 @@ public abstract class AbstractDAO<T> {
 			try {
 				statement.close();
 			} catch (SQLException e) {
-				logger.error(e.getMessage(), e);
+				logger.error(SQL_ERROR, e);
 			}
 		}
 	}
@@ -99,7 +99,7 @@ public abstract class AbstractDAO<T> {
 			try {
 				statement.close();
 			} catch (SQLException e) {
-				logger.error(e.getMessage(), e);
+				logger.error(SQL_ERROR, e);
 			}
 		}
 	}
@@ -117,7 +117,7 @@ public abstract class AbstractDAO<T> {
 			try {
 				statement.close();
 			} catch (SQLException e) {
-				logger.error(e.getMessage(), e);
+				logger.error(SQL_ERROR, e);
 			}
 		}
 	}
@@ -128,7 +128,7 @@ public abstract class AbstractDAO<T> {
 		Statement statement = null;
 		try {
 			statement = connection.createStatement();
-			String query = (sortingColumn.length == 1) ? injectGetAllQuery() + " order by" + sortingColumn[0]
+			String query = (sortingColumn.length == 1) ? injectGetAllQuery() + " order by " + sortingColumn[0]
 					: injectGetAllQuery();
 			ResultSet resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
@@ -142,22 +142,9 @@ public abstract class AbstractDAO<T> {
 			try {
 				statement.close();
 			} catch (SQLException e) {
-				logger.error(e.getMessage(), e);
+				logger.error(SQL_ERROR, e);
 			}
 		}
 	}
-
-	// public Task parseTask(ResultSet rs) {
-	//
-	// try {
-	// return new Task(rs.getInt("id_task"), rs.getString("to_do"),
-	// rs.getDate("request_date"),
-	// rs.getDate("start_date"), rs.getDate("complete_date"),
-	// rs.getDouble("price"));
-	// } catch (SQLException e) {
-	// return null;
-	// }
-	// }
-	//
 
 }

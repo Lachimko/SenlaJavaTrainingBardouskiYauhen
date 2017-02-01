@@ -4,9 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.bardouski.controllers.dao.AbstractDAO;
+import com.bardouski.controllers.dao.IGarageDAO;
 import com.bardouski.model.impl.Garage;
 
-public class GarageDAO extends AbstractDAO<Garage> {
+public class GarageDAO extends AbstractDAO<Garage> implements IGarageDAO {
 
 	private static final String ADD_GARAGE = "insert into garage value (?)";
 
@@ -14,12 +16,31 @@ public class GarageDAO extends AbstractDAO<Garage> {
 	private static final String SELECT_GARAGE_BY_ID = "select * from garage where id_garage = ?";
 	private static final String DELETE_GARAGE_BY_ID = "delete from garage where id_garage = ?";
 
-	public String injectGetByIdQuery() {
+	protected String injectGetByIdQuery() {
 		return SELECT_GARAGE_BY_ID;
 	}
 
-	public Garage parseEntity(ResultSet resultSet) {
+	@Override
+	protected String injectInsertQuery() {
+		return ADD_GARAGE;
+	}
 
+	@Override
+	protected String injectDeleteQuery() {
+		return DELETE_GARAGE_BY_ID;
+	}
+
+	@Override
+	protected String injectGetAllQuery() {
+		return SELECT_ALL_FROM_GARAGE;
+	}
+
+	@Override
+	protected String injectUpdateQuery() {
+		return null;
+	}
+
+	protected Garage parseEntity(ResultSet resultSet) {
 		try {
 			Garage temp = new Garage();
 			temp.setId(resultSet.getInt("id_garage"));
@@ -31,32 +52,12 @@ public class GarageDAO extends AbstractDAO<Garage> {
 	}
 
 	@Override
-	public String injectInsertQuery() {
-		return ADD_GARAGE;
+	protected void prepareUpdateStatement(PreparedStatement statement, Garage object) throws SQLException {
+		return; // No fields to update
 	}
 
 	@Override
-	public String injectDeleteQuery() {
-		return DELETE_GARAGE_BY_ID;
-	}
-
-	@Override
-	public String injectGetAllQuery() {
-		return SELECT_ALL_FROM_GARAGE;
-	}
-
-	@Override
-	public String injectUpdateQuery() {
-		return null;
-	}
-
-	@Override
-	public void prepareUpdateStatement(PreparedStatement statement, Garage object) throws SQLException {
-		
-	}
-
-	@Override
-	public void prepareInsertStatement(PreparedStatement statement, Garage object) throws SQLException {
+	protected void prepareInsertStatement(PreparedStatement statement, Garage object) throws SQLException {
 		statement.setString(1, null);
 	}
 

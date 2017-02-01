@@ -75,7 +75,7 @@ public class MenuBuilder implements IMenuBuilder {
 
 		// {Order Manager -> View sorted by Date}
 		MenuElement ordersSorter = createMenuAndSetToParent("View sorted by Date", orderManager);
-		createMenuAndSetToParent("By Request Date", ordersSorter, new SortOrdersByRequestDateAction(in, out));
+		createMenuAndSetToParent("By Request Date", ordersSorter, new sortOrdersByRequestDateAction(in, out));
 		createMenuAndSetToParent("By Complete Date", ordersSorter, new SortOrdersByCompleteDateAction(in, out));
 		createMenuAndSetToParent("By Start Date", ordersSorter, new SortOrdersByStartDateAction(in, out));
 		createMenuAndSetToParent("By Price", ordersSorter, new SortOrdersByPriceAction(in, out));

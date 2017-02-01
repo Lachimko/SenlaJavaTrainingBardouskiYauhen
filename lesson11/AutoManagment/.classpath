@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="D:/Eclipse/bin/log4j-1.2.17.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/AutoManagmentAPI"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/dbConnector"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/MySQLDateParser"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

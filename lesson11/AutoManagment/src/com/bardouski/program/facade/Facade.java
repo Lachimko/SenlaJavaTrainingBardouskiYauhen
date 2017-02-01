@@ -1,6 +1,5 @@
 package com.bardouski.program.facade;
 
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import com.bardouski.exceptions.NoSuchObjectException;
 import com.bardouski.facade.IFacade;
 import com.bardouski.model.IGarage;
 import com.bardouski.model.IOrder;
-import com.bardouski.model.impl.Garage;
 import com.bardouski.model.impl.Mechanic;
 import com.bardouski.model.impl.Order;
 import com.bardouski.model.impl.WorkPlace;
@@ -53,11 +51,6 @@ public class Facade implements IFacade {
 	public void setOrderService(IOrderService orderService) {
 		this.orderService = (OrderService) orderService;
 	}
-
-//	@Override
-//	public void addMechanic(IMechanic mechanic) {
-//		mechanicService.add(mechanic);
-//	}
 
 	@Override
 	public void removeMechanic(int mechanicID) throws NoSuchObjectException {
@@ -104,8 +97,11 @@ public class Facade implements IFacade {
 		workPlaceService.createWorkPlaceInGarage(garageID);
 	}
 
-	/** return false if collection had not been affected 
-	 * @throws NoSuchObjectException */
+	/**
+	 * return false if collection had not been affected
+	 * 
+	 * @throws NoSuchObjectException
+	 */
 	@Override
 	public boolean removeWorkPlaceInGarage(int garageID, int workPlaceID) throws NoSuchObjectException {
 		return workPlaceService.removeWorkPlaceInGarage(garageID, workPlaceID);
@@ -119,8 +115,7 @@ public class Facade implements IFacade {
 
 	@Override
 	public List<WorkPlace> getFreePlacesInDate(Date date) {
-		List<Garage> garages = workPlaceService.getGarages();
-		return orderService.getFreePlacesInDate(date, garages);
+		return orderService.getFreePlacesInDate(date);
 	}
 
 	/**
@@ -172,11 +167,26 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<Order> returnOrdersSortedByComparator(Comparator<IOrder> comparator) {
-		return orderService.returnOrdersSortedByComparator(comparator);
+	public List<Order> sortOrdersByCompleteDateAction() {
+		return orderService.sortOrdersByCompleteDateAction();
 	}
 
-	/*Already synchronized in get methods in its stores*/
+	@Override
+	public List<Order> sortOrdersByPriceAction() {
+		return orderService.sortOrdersByPriceAction();
+	}
+
+	@Override
+	public List<Order> sortOrdersByRequestDateAction() {
+		return orderService.sortOrdersByRequestDateAction();
+	}
+
+	@Override
+	public List<Order> sortOrdersByStartDateAction() {
+		return orderService.sortOrdersByStartDateAction();
+	}
+
+	/* Already synchronized in get methods in its stores */
 	@Override
 	public void saveToFile() {
 		orderService.saveToFile(new FacadeResultContainer(mechanicService.getAllMechanics(),

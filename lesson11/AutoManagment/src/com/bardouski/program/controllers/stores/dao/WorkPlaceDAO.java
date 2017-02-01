@@ -6,8 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.apache.log4j.Logger;
-
+import com.bardouski.controllers.dao.AbstractDAO;
 import com.bardouski.exceptions.NoSuchObjectException;
 import com.bardouski.model.impl.WorkPlace;
 
@@ -17,9 +16,9 @@ public class WorkPlaceDAO extends AbstractDAO<WorkPlace> {
 	private static final String SELECT_WORKPLACE_BY_ID = "select * from workplace where id_workplace = ?";
 	private static final String SELECT_ALL_FROM_WORKPLACE = "select * from workplace";
 	private static final String REMOVE_WORKPLACE_IN_GARAGE = "delete from workplace where id_garage = ? and id_workplace = ?";
+	private static final String REMOVE_WORKPLACE = "delete from workplace where id_workplace = ?";
 	private static final String FREE_WORKPLACE = "select * from workplace where id_order is null limit 1";
 	private static final String INSERT_WORKPLACE_IN_GARAGE = "insert into workplace(id_garage) value (?)";
-	private Logger logger = Logger.getLogger(WorkPlaceDAO.class.getSimpleName());
 
 	/** Unique method, field garage_id in table workplace cannot be null. */
 	public void create(Connection connection, int garageID) {
@@ -90,22 +89,27 @@ public class WorkPlaceDAO extends AbstractDAO<WorkPlace> {
 	}
 
 	@Override
-	public String injectGetByIdQuery() {
+	protected String injectGetByIdQuery() {
 		return SELECT_WORKPLACE_BY_ID;
 	}
 
 	@Override
-	public String injectUpdateQuery() {
+	protected String injectUpdateQuery() {
 		return UPDATE_WORKPLACE;
 	}
 
 	@Override
-	public String injectGetAllQuery() {
+	protected String injectGetAllQuery() {
 		return SELECT_ALL_FROM_WORKPLACE;
 	}
 
 	@Override
-	public WorkPlace parseEntity(ResultSet resultSet) {
+	protected String injectDeleteQuery() {
+		return REMOVE_WORKPLACE;
+	}
+
+	@Override
+	protected WorkPlace parseEntity(ResultSet resultSet) {
 
 		try {
 			WorkPlace temp = new WorkPlace();
@@ -118,26 +122,28 @@ public class WorkPlaceDAO extends AbstractDAO<WorkPlace> {
 	}
 
 	@Override
-	public String injectInsertQuery() {
-		return null;
-	}
-
-	@Override
-	public String injectDeleteQuery() {
-		return null;
-	}
-
-	@Override
-	public void prepareUpdateStatement(PreparedStatement statement, WorkPlace object) throws SQLException {
+	protected void prepareUpdateStatement(PreparedStatement statement, WorkPlace object) throws SQLException {
 		statement.setInt(1, object.getOrder().getId());
 		statement.setInt(2, object.getId());
 	}
 
-	@Override
-	public void prepareInsertStatement(PreparedStatement statement, WorkPlace object) throws SQLException {
-		// error method
-		statement.setInt(1, object.getId());
-		
+	@Deprecated
+	public void create(Connection connection, WorkPlace object) {
+		return; // Overloading method from abstract class. use create(Connection
+				// connection, int garageID)
 	}
 
+	@Override
+	@Deprecated
+	protected void prepareInsertStatement(PreparedStatement statement, WorkPlace object) throws SQLException {
+		return; // Overloading method from abstract class. Not used by create of
+				// superclass
+	}
+
+	@Override
+	@Deprecated
+	protected String injectInsertQuery() {
+		return null; // Overloading method from abstract class. Not used by
+						// create of superclass
+	}
 }

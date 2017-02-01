@@ -1,12 +1,10 @@
 package com.bardouski.controllers.services;
 
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 import com.bardouski.dbprocessor.serializator.IResultContainer;
 import com.bardouski.exceptions.NoSuchObjectException;
-import com.bardouski.model.IGarage;
 import com.bardouski.model.IOrder;
 import com.bardouski.model.IWorkPlace;
 import com.bardouski.model.impl.enums.OrderStatus;
@@ -25,10 +23,16 @@ public interface IOrderService {
 
 	void removeOrder(int order) throws NoSuchObjectException;
 
-	List<? extends IOrder> returnOrdersSortedByComparator(Comparator<IOrder> comparator);
+	List<? extends IWorkPlace> getFreePlacesInDate(Date date);
 
-	List<? extends IWorkPlace> getFreePlacesInDate(Date date, List<? extends IGarage> garages);
-
+	List<? extends IOrder> sortOrdersByCompleteDateAction();
+	
+	List<? extends IOrder> sortOrdersByPriceAction();
+	
+	List<? extends IOrder> sortOrdersByRequestDateAction();
+	
+	List<? extends IOrder> sortOrdersByStartDateAction();
+	
 	void saveToFile(IResultContainer resultContainer);
 
 	/**Return new unique Id from OrderStore. Use for getting clone*/

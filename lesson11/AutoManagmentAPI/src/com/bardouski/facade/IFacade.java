@@ -1,6 +1,5 @@
 package com.bardouski.facade;
 
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -108,11 +107,14 @@ public interface IFacade {
 	 */
 	List<? extends IOrder> getAllOrders(OrderStatus orderStatus);
 
-	/**
-	 * return collection of orders sorted by transfer in parameter comparator
-	 */
-	List<? extends IOrder> returnOrdersSortedByComparator(Comparator<IOrder> comparator);
-
+	List<? extends IOrder> sortOrdersByCompleteDateAction();
+	
+	List<? extends IOrder> sortOrdersByPriceAction();
+	
+	List<? extends IOrder> sortOrdersByRequestDateAction();
+	
+	List<? extends IOrder> sortOrdersByStartDateAction();
+	
 	/** Save to DB all Stores collections */
 	void saveToFile();
 

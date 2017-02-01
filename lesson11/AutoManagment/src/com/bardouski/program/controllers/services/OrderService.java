@@ -26,18 +26,18 @@ import com.bardouski.program.controllers.stores.dao.TaskDAO;
 import com.bardouski.program.controllers.stores.dao.WorkPlaceDAO;
 import com.bardouski.propertiesholder.PropertiesContext;
 
-public class OrderService implements IOrderService{
+public class OrderService implements IOrderService {
 
 	private OrderDAO orderDAO = new OrderDAO();
 	private TaskDAO taskDAO = new TaskDAO();
 	private Connection connection = DBConnector.getConnection();
 	private OrderStore orderStore;
 
-	public OrderService() throws ClassNotFoundException{
+	public OrderService() throws ClassNotFoundException {
 		orderStore = (OrderStore) PropertiesContext.getInstance(IOrderStore.class);
 	}
-	
-	/**get Instances from DI pool than call methods in transaction scope */
+
+	/** get Instances from DI pool than call methods in transaction scope */
 	@Override
 	public void addOrder(IOrder order) {
 		Savepoint savepoint = null;
@@ -63,12 +63,11 @@ public class OrderService implements IOrderService{
 			}
 		} finally {
 			try {
-				connection.rollback(savepoint);
 				connection.setAutoCommit(true);
 			} catch (SQLException e) {
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -80,15 +79,15 @@ public class OrderService implements IOrderService{
 	public List<Order> getAllOrders() {
 		return orderDAO.getAll(connection);
 	}
-	
+
 	@Override
 	public List<Order> getAllOrders(OrderStatus orderStatus) {
 		return orderDAO.getAll(connection, orderStatus);
 	}
-	
+
 	@Override
 	public void replaceDatesOfOrdersFrom(int order, int howManyDays) {
-		orderDAO.replaceDatesOfOrdersFrom(connection, order, howManyDays);
+		orderDAO.sortOrdersByCompleteDateAction(connection);
 	}
 
 	@Override
@@ -96,28 +95,36 @@ public class OrderService implements IOrderService{
 		orderDAO.delete(connection, orderID);
 	}
 
-	
-	
-	
 	@Override
-	public List<Order> returnOrdersSortedByComparator(Comparator<IOrder> comparator) {
-		return orderDAO.returnOrdersSortedByComparator(comparator);
+	public List<WorkPlace> getFreePlacesInDate(Date date) {
+		return orderDAO.getFreePlacesInDate(connection, date);
 	}
 
-	@Override
-	public List<WorkPlace> getFreePlacesInDate(Date date, List<? extends IGarage> garages) {
-		return orderDAO.getFreePlacesInDate(date, garages);
+	public List<Order> sortOrdersByCompleteDateAction() {
+		return orderDAO.sortOrdersByCompleteDateAction(connection);
 	}
 
+	public List<Order> sortOrdersByPriceAction() {
+		return orderDAO.sortOrdersByPriceAction(connection);
+	}
+
+	public List<Order> sortOrdersByRequestDateAction() {
+		return orderDAO.sortOrdersByRequestDateAction(connection);
+	}
+
+	public List<Order> sortOrdersByStartDateAction() {
+		return orderDAO.sortOrdersByStartDateAction(connection);
+	}
+	
 	@Override
 	public void saveToFile(IResultContainer resultContainer) {
 		orderStore.saveToFile(resultContainer);
 	}
 
-	/**Return new unique Id from OrderStore. Use for getting clone*/
+	/** Return new unique Id from OrderStore. Use for getting clone */
 	@Override
-	public int getNextOrderId(){
+	public int getNextOrderId() {
 		return orderStore.getNextId();
 	}
-	
+
 }
