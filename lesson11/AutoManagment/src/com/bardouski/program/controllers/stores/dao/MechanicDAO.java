@@ -7,17 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
+import com.bardouski.controllers.dao.AbstractDAO;
+import com.bardouski.controllers.dao.IMechanicDAO;
 import com.bardouski.exceptions.NoSuchObjectException;
 import com.bardouski.model.impl.Mechanic;
 
-public class MechanicDAO extends AbstractDAO<Mechanic> {
+public class MechanicDAO extends AbstractDAO<Mechanic> implements IMechanicDAO {
 
 	private static final String UPDATE_MECHANIC = "update mechanic set id_order=? where id_mechanic=?";
-
-	private Logger logger = Logger.getLogger(MechanicDAO.class.getSimpleName());
-
 	private static final String SELECT_ALL_FROM_MECHANIC = "select * from mechanic";
 	private static final String GET_FREE_MECHANIC = "select * from mechanic where id_order is null";
 	private static final String DELETE_MECHANIC_BY_ID = "delete from mechanic where id_mechanic = ?";
@@ -25,35 +22,36 @@ public class MechanicDAO extends AbstractDAO<Mechanic> {
 	private static final String INSERT_MECHANIC = "insert into mechanic(full_name) value (?)";
 
 	@Override
-	public String injectInsertQuery() {
+	protected String injectInsertQuery() {
 		return INSERT_MECHANIC;
 	}
 
 	@Override
-	public String injectGetByIdQuery() {
+	protected String injectGetByIdQuery() {
 		return SELECT_MECHANIC_BY_ID;
 	}
 
 	@Override
-	public String injectDeleteQuery() {
+	protected String injectDeleteQuery() {
 		return DELETE_MECHANIC_BY_ID;
 	}
 
 	@Override
-	public String injectGetAllQuery() {
+	protected String injectGetAllQuery() {
 		return SELECT_ALL_FROM_MECHANIC;
 	}
 
 	@Override
-	public String injectUpdateQuery() {
+	protected String injectUpdateQuery() {
 		return UPDATE_MECHANIC;
 	}
 
 	@Override
-	public Mechanic parseEntity(ResultSet resultSet) {
+	protected Mechanic parseEntity(ResultSet resultSet) {
 		try {
 			return new Mechanic(resultSet.getInt("id_mechanic"), resultSet.getString("full_name"), null);
 		} catch (SQLException e) {
+			logger.error(SQL_ERROR);
 			return null;
 		}
 	}
@@ -76,7 +74,7 @@ public class MechanicDAO extends AbstractDAO<Mechanic> {
 			try {
 				statement.close();
 			} catch (SQLException e) {
-				logger.error(e.getMessage(), e);
+				logger.error(SQL_ERROR, e);
 			}
 		}
 	}
@@ -90,13 +88,13 @@ public class MechanicDAO extends AbstractDAO<Mechanic> {
 	}
 
 	@Override
-	public void prepareUpdateStatement(PreparedStatement statement, Mechanic object) throws SQLException {
+	protected void prepareUpdateStatement(PreparedStatement statement, Mechanic object) throws SQLException {
 		statement.setInt(1, object.getCurrentOrder().getId());
 		statement.setInt(2, object.getId());
 	}
 
 	@Override
-	public void prepareInsertStatement(PreparedStatement statement, Mechanic object) throws SQLException {
+	protected void prepareInsertStatement(PreparedStatement statement, Mechanic object) throws SQLException {
 		statement.setString(1, object.getFullName());
 	}
 

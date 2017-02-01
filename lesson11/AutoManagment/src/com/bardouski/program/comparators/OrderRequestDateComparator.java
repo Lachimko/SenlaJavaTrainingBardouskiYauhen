@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import com.bardouski.model.impl.Order;
 
+@Deprecated
 public class OrderRequestDateComparator implements Comparator<Order> {
 
 	@Override
