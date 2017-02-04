@@ -23,23 +23,22 @@ public class Server {
 
 	private static final String CONFIG = "resources\\config.properties";
 	private static final String CONTEXT = "resources\\context.properties";
+	private static final int PORT = 6666;
 
 	private static Logger logger = Logger.getLogger(Server.class.getSimpleName());
-	static final int PORT = 6666;
 
 	public static void main(String[] args) throws IOException {
 
 		new PropertiesContext(CONTEXT);
 		ProgramProps.loadPropertiesByPath(CONFIG);
-		
-		try {
-			DBConnector.configure(ProgramProps.valueOf("dbUrl"), ProgramProps.valueOf("dbUser"), ProgramProps.valueOf("dbPassword"));
-		} catch (SQLException e1) {
-			logger.error(e1.getMessage());
-		}
-		
+
+		DBConnector dbconnector;
 		IFacade facade;
+		
 		try {
+			dbconnector = (DBConnector) PropertiesContext.getInstance(DBConnector.class);
+			dbconnector.configure(ProgramProps.valueOf("dbUrl"), ProgramProps.valueOf("dbUser"),
+					ProgramProps.valueOf("dbPassword"));
 			facade = (IFacade) PropertiesContext.getInstance(IFacade.class);
 			if (facade == null) {
 				throw new NoSuchObjectException();
@@ -49,9 +48,8 @@ public class Server {
 			logger.fatal(e1.getMessage());
 			System.err.println("Error initializing facade.");
 			return;
-		} 
+		}
 
-		
 		ServerSocket serverSocket = new ServerSocket(PORT);
 		System.out.println("Server Started");
 
@@ -72,9 +70,9 @@ public class Server {
 		} finally {
 			serverSocket.close();
 			try {
-				DBConnector.closeConnection();
+				dbconnector.close();
 			} catch (SQLException e) {
-				
+
 			}
 		}
 	}

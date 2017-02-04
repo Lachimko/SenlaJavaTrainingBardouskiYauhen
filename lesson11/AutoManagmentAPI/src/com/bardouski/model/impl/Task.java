@@ -12,7 +12,7 @@ public class Task implements Serializable, ITask {
 
 	private static final long serialVersionUID = 4735856939575291114L;
 
-	private int id;
+	private Integer id;
 	@Printable(name = "taskToDo", isDetailedOnly = false, order = 0)
 	private String toDo;
 	@Printable(name = "taskRequestDate", isDetailedOnly = false, order = 1)
@@ -24,7 +24,7 @@ public class Task implements Serializable, ITask {
 	@Printable(name = "taskPrice", isDetailedOnly = false, order = 4)
 	private double price;
 
-	public Task(int id, String toDo, Date requestDate, Date startDate, Date completeDate, double price) {
+	public Task(Integer id, String toDo, Date requestDate, Date startDate, Date completeDate, double price) {
 		this.id = id;
 		this.toDo = toDo;
 		this.requestDate = requestDate;
@@ -36,11 +36,11 @@ public class Task implements Serializable, ITask {
 	public Task() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

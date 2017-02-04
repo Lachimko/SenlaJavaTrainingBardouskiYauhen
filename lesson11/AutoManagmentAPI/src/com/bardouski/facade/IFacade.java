@@ -82,9 +82,6 @@ public interface IFacade {
 	 */
 	IOrder getOrder(int orderId) throws NoSuchObjectException;
 
-	/** Return new unique Id from OrderStore. Use for getting clone */
-	int getNextOrderId();
-
 	/** Add Order to collection */
 	void createOrder(IOrder order);
 
@@ -115,9 +112,6 @@ public interface IFacade {
 	
 	List<? extends IOrder> sortOrdersByStartDateAction();
 	
-	/** Save to DB all Stores collections */
-	void saveToFile();
-
 	/** Import mechanics list to CSV file */
 	void importMechnaics();
 

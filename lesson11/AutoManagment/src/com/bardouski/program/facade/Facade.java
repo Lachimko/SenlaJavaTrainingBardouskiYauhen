@@ -17,7 +17,6 @@ import com.bardouski.model.impl.enums.OrderStatus;
 import com.bardouski.program.controllers.services.MechanicService;
 import com.bardouski.program.controllers.services.OrderService;
 import com.bardouski.program.controllers.services.WorkPlaceService;
-import com.bardouski.program.dbprocessor.serializator.FacadeResultContainer;
 import com.bardouski.propertiesholder.PropertiesContext;
 
 public class Facade implements IFacade {
@@ -129,12 +128,6 @@ public class Facade implements IFacade {
 		return orderService.getOrder(orderId);
 	}
 
-	/** Return new unique Id from OrderStore. Use for getting clone */
-	@Override
-	public int getNextOrderId() {
-		return orderService.getNextOrderId();
-	}
-
 	/** Add Order to collection */
 	@Override
 	public void createOrder(IOrder order) {
@@ -184,13 +177,6 @@ public class Facade implements IFacade {
 	@Override
 	public List<Order> sortOrdersByStartDateAction() {
 		return orderService.sortOrdersByStartDateAction();
-	}
-
-	/* Already synchronized in get methods in its stores */
-	@Override
-	public void saveToFile() {
-		orderService.saveToFile(new FacadeResultContainer(mechanicService.getAllMechanics(),
-				orderService.getAllOrders(), workPlaceService.getGarages()));
 	}
 
 	@Override

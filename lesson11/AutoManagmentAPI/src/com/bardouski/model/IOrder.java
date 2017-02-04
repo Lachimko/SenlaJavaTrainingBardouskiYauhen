@@ -4,9 +4,9 @@ import com.bardouski.model.impl.enums.OrderStatus;
 
 public interface IOrder {
 
-	int getId();
+	Integer getId();
 
-	void setId(int id);
+	void setId(Integer id);
 
 	OrderStatus getOrderStatus();
 

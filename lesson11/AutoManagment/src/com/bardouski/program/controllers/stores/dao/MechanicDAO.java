@@ -14,6 +14,9 @@ import com.bardouski.model.impl.Mechanic;
 
 public class MechanicDAO extends AbstractDAO<Mechanic> implements IMechanicDAO {
 
+	private static final String ID_ORDER = "id_order";
+	private static final String FULL_NAME = "full_name";
+	private static final String ID_MECHANIC = "id_mechanic";
 	private static final String UPDATE_MECHANIC = "update mechanic set id_order=? where id_mechanic=?";
 	private static final String SELECT_ALL_FROM_MECHANIC = "select * from mechanic";
 	private static final String GET_FREE_MECHANIC = "select * from mechanic where id_order is null";
@@ -49,7 +52,7 @@ public class MechanicDAO extends AbstractDAO<Mechanic> implements IMechanicDAO {
 	@Override
 	protected Mechanic parseEntity(ResultSet resultSet) {
 		try {
-			return new Mechanic(resultSet.getInt("id_mechanic"), resultSet.getString("full_name"), null);
+			return new Mechanic(resultSet.getInt(ID_MECHANIC), resultSet.getString(FULL_NAME), null);
 		} catch (SQLException e) {
 			logger.error(SQL_ERROR);
 			return null;
@@ -80,11 +83,11 @@ public class MechanicDAO extends AbstractDAO<Mechanic> implements IMechanicDAO {
 	}
 
 	public List<Mechanic> sortMechanicsByFullName(Connection connection) {
-		return getAll(connection, "full_name");
+		return getAll(connection, FULL_NAME);
 	}
 
 	public List<Mechanic> sortMechanicsByWork(Connection connection) {
-		return getAll(connection, "id_order");
+		return getAll(connection, ID_ORDER);
 	}
 
 	@Override

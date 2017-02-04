@@ -7,8 +7,6 @@ import com.bardouski.model.IMechanic;
 
 public interface IMechanicService {
 
-//	void add(IMechanic mechanic);
-	
 	void add(String fullName);
 	
 	void remove(int mechanicID) throws NoSuchObjectException;

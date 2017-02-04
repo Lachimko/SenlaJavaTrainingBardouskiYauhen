@@ -17,7 +17,7 @@ public class Order implements Serializable, Cloneable, IOrder {
 	private static final long serialVersionUID = -6439747776065625336L;
 
 	@Printable(name = "orderID", isDetailedOnly = false, order = 0)
-	private int id;
+	private Integer id;
 	@PrintableRef(name = "orderMechanic", order = 1)
 	private Mechanic mechanic;
 	@PrintableRef(name = "orderWorkPlace", order = 2)
@@ -37,12 +37,12 @@ public class Order implements Serializable, Cloneable, IOrder {
 	}
 
 	@Override
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	@Override
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

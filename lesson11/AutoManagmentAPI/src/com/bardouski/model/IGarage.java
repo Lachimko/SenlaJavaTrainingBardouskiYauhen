@@ -2,12 +2,16 @@ package com.bardouski.model;
 
 import java.util.List;
 
+import com.bardouski.model.impl.WorkPlace;
+
 public interface IGarage {
 
-	int getId();
+	Integer getId();
 
-	void setId(int id);
+	void setId(Integer id);
 
 	List<? extends IWorkPlace> getWorkPlaces();
+	
+	void setWorkPlaces(List<WorkPlace> workPlaces);
 
 }
