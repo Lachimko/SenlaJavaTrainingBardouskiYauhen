@@ -10,8 +10,8 @@ public interface IMechanic {
 
 	void setCurrentOrder(IOrder currentOrder);
 
-	int getId();
+	Integer getId();
 
-	void setId(int id);
+	void setId(Integer id);
 
 }

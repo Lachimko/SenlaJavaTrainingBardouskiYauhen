@@ -6,8 +6,8 @@ public interface IWorkPlace {
 
 	void setOrder(IOrder order);
 
-	int getId();
+	Integer getId();
 
-	void setId(int id);
+	void setId(Integer id);
 
 }

@@ -10,8 +10,8 @@ import com.bardouski.model.impl.Garage;
 
 public class GarageDAO extends AbstractDAO<Garage> implements IGarageDAO {
 
+	private static final String ID_GARAGE = "id_garage";
 	private static final String ADD_GARAGE = "insert into garage value (?)";
-
 	private static final String SELECT_ALL_FROM_GARAGE = "select * from garage";
 	private static final String SELECT_GARAGE_BY_ID = "select * from garage where id_garage = ?";
 	private static final String DELETE_GARAGE_BY_ID = "delete from garage where id_garage = ?";
@@ -43,7 +43,7 @@ public class GarageDAO extends AbstractDAO<Garage> implements IGarageDAO {
 	protected Garage parseEntity(ResultSet resultSet) {
 		try {
 			Garage temp = new Garage();
-			temp.setId(resultSet.getInt("id_garage"));
+			temp.setId(resultSet.getInt(ID_GARAGE));
 			return temp;
 
 		} catch (SQLException e) {

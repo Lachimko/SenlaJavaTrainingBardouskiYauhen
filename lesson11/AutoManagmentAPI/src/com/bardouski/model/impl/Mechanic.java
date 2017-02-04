@@ -14,7 +14,7 @@ public class Mechanic implements Serializable, IMechanic {
 	private static final long serialVersionUID = -1256372256008341555L;
 
 	@Printable(name = "mechanicID", isDetailedOnly = false, order = 0)
-	private int id;
+	private Integer id;
 	@Printable(name = "mechanicFullName", isDetailedOnly = false, order = 1)
 	private String fullName;
 	@PrintableRef(name = "mechanicOrder", order = 2)
@@ -27,7 +27,7 @@ public class Mechanic implements Serializable, IMechanic {
 	public Mechanic() {
 	}
 	
-	public Mechanic(int id, String fullName, Order currentOrder) {
+	public Mechanic(Integer id, String fullName, Order currentOrder) {
 		this.id = id;
 		this.fullName = fullName;
 		this.currentOrder = currentOrder;
@@ -54,12 +54,12 @@ public class Mechanic implements Serializable, IMechanic {
 	}
 
 	@Override
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	@Override
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

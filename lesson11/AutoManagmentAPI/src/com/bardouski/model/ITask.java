@@ -24,7 +24,7 @@ public interface ITask {
 
 	void setPrice(double price);
 
-	int getId();
+	Integer getId();
 	
-	void setId(int id);
+	void setId(Integer id);
 }

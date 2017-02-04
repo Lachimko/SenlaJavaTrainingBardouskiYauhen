@@ -14,7 +14,7 @@ public class WorkPlace implements IWorkPlace, Serializable {
 	private static final long serialVersionUID = -2823107008398216104L;
 
 	@Printable(name = "workPlaceID", isDetailedOnly = false, order = 0)
-	private int id;
+	private Integer id;
 	@PrintableRef(name = "workPlaceOrder", order = 1)
 	private Order order;
 
@@ -32,12 +32,12 @@ public class WorkPlace implements IWorkPlace, Serializable {
 	}
 
 	@Override
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	@Override
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

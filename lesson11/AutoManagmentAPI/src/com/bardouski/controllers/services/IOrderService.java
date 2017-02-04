@@ -3,7 +3,6 @@ package com.bardouski.controllers.services;
 import java.util.Date;
 import java.util.List;
 
-import com.bardouski.dbprocessor.serializator.IResultContainer;
 import com.bardouski.exceptions.NoSuchObjectException;
 import com.bardouski.model.IOrder;
 import com.bardouski.model.IWorkPlace;
@@ -32,10 +31,5 @@ public interface IOrderService {
 	List<? extends IOrder> sortOrdersByRequestDateAction();
 	
 	List<? extends IOrder> sortOrdersByStartDateAction();
-	
-	void saveToFile(IResultContainer resultContainer);
-
-	/**Return new unique Id from OrderStore. Use for getting clone*/
-	int getNextOrderId();
 	
 }

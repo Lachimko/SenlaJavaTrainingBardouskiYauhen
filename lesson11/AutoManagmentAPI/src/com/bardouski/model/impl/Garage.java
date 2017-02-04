@@ -15,7 +15,7 @@ public class Garage implements Serializable, IGarage {
 	private static final long serialVersionUID = -1967004606058120313L;
 
 	@Printable(name = "garageID", isDetailedOnly = false, order = 0)
-	private int id;
+	private Integer id;
 	@PrintableRef(name = "garageWorkPlacesList", isDetailedView = false, order = 1, isRecursive = true)
 	private List<WorkPlace> workPlaces = new ArrayList<WorkPlace>();
 
@@ -23,18 +23,22 @@ public class Garage implements Serializable, IGarage {
 	}
 
 	@Override
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	@Override
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	@Override
 	public List<WorkPlace> getWorkPlaces() {
 		return workPlaces;
+	}
+
+	public void setWorkPlaces(List<WorkPlace> workPlaces) {
+		this.workPlaces = workPlaces;
 	}
 
 }

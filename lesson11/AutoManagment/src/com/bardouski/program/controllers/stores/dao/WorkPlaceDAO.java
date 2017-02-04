@@ -12,6 +12,7 @@ import com.bardouski.model.impl.WorkPlace;
 
 public class WorkPlaceDAO extends AbstractDAO<WorkPlace> {
 
+	private static final String ID_WORKPLACE = "id_workplace";
 	private static final String UPDATE_WORKPLACE = "update workplace set id_order=? where id_workplace=?";
 	private static final String SELECT_WORKPLACE_BY_ID = "select * from workplace where id_workplace = ?";
 	private static final String SELECT_ALL_FROM_WORKPLACE = "select * from workplace";
@@ -113,7 +114,7 @@ public class WorkPlaceDAO extends AbstractDAO<WorkPlace> {
 
 		try {
 			WorkPlace temp = new WorkPlace();
-			temp.setId(resultSet.getInt("id_workplace"));
+			temp.setId(resultSet.getInt(ID_WORKPLACE));
 			return temp;
 
 		} catch (SQLException e) {

@@ -19,6 +19,14 @@ import com.bardouski.propertiesholder.PropertiesContext;
 
 public class OrderDAO extends AbstractDAO<Order> implements IOrderDAO {
 
+	private static final String ID_GARAGE = "id_garage";
+	private static final String FULL_NAME = "full_name";
+	private static final String TO_DO = "to_do";
+	private static final String ID_ORDER = "id_order";
+	private static final String START_DATE = "start_date";
+	private static final String REQUEST_DATE = "request_date";
+	private static final String PRICE = "price";
+	private static final String COMPLETE_DATE = "complete_date";
 	private static final String DATE_RANGE = " where start_date < ? and complete_date > ?";
 	private static final String SELECT_FROM_ORDER_STATUS = "select * from `order` where status = ?";
 	private static final String UPDATE_ORDER_STATUS = "update `order` set id_mechanic=?, id_workplace=?, id_task=?, status=? where id_order=?";
@@ -53,22 +61,22 @@ public class OrderDAO extends AbstractDAO<Order> implements IOrderDAO {
 
 	@Override
 	public List<Order> sortOrdersByCompleteDateAction(Connection connection) {
-		return getAll(connection, "complete_date");
+		return getAll(connection, COMPLETE_DATE);
 	}
 
 	@Override
 	public List<Order> sortOrdersByPriceAction(Connection connection) {
-		return getAll(connection, "price");
+		return getAll(connection, PRICE);
 	}
 
 	@Override
 	public List<Order> sortOrdersByRequestDateAction(Connection connection) {
-		return getAll(connection, "request_date");
+		return getAll(connection, REQUEST_DATE);
 	}
 
 	@Override
 	public List<Order> sortOrdersByStartDateAction(Connection connection) {
-		return getAll(connection, "start_date");
+		return getAll(connection, START_DATE);
 	}
 	
 	@Override
@@ -122,20 +130,20 @@ public class OrderDAO extends AbstractDAO<Order> implements IOrderDAO {
 
 		try {
 			Order temp = new Order();
-			temp.setId(resultSet.getInt("id_order"));
+			temp.setId(resultSet.getInt(ID_ORDER));
 			temp.setOrderStatus(OrderStatus.valueOf(resultSet.getString("status")));
 
-			if (resultSet.findColumn("to_do") > 0) {
+			if (resultSet.findColumn(TO_DO) > 0) {
 				TaskDAO taskDAO = (TaskDAO) PropertiesContext.getInstance(TaskDAO.class);
 				temp.setTask(taskDAO.parseEntity(resultSet));
 			}
 
-			if (resultSet.findColumn("full_name") > 0) {
+			if (resultSet.findColumn(FULL_NAME) > 0) {
 				MechanicDAO mechanicDAO = (MechanicDAO) PropertiesContext.getInstance(MechanicDAO.class);
 				temp.setMechanic(mechanicDAO.parseEntity(resultSet));
 			}
 
-			if (resultSet.findColumn("id_garage") > 0) {
+			if (resultSet.findColumn(ID_GARAGE) > 0) {
 				WorkPlaceDAO workPlaceDAO = (WorkPlaceDAO) PropertiesContext.getInstance(WorkPlaceDAO.class);
 				temp.setWorkPlace(workPlaceDAO.parseEntity(resultSet));
 			}

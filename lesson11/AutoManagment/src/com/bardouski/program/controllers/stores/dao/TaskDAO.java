@@ -11,6 +11,12 @@ import com.bardouski.mysqlparser.MySQLDateParser;
 
 public class TaskDAO extends AbstractDAO<Task> implements ITaskDAO {
 
+	private static final String PRICE = "price";
+	private static final String COMPLETE_DATE = "complete_date";
+	private static final String START_DATE = "start_date";
+	private static final String REQUEST_DATE = "request_date";
+	private static final String TO_DO = "to_do";
+	private static final String ID_TASK = "id_task";
 	private static final String UPDATE_TASK = "update task set to_do=?, request_date=?, start_date=?, complete_date=?, price=? where id_task=?";
 	private static final String INSERT_INTO_TASK = "insert into task(to_do, request_date, start_date, complete_date, price) value (?, now(), ?, ?, ?)";
 	private static final String SELECT_FROM_TASK_BY_ID = "select * from task where id_task = ?";
@@ -41,8 +47,8 @@ public class TaskDAO extends AbstractDAO<Task> implements ITaskDAO {
 	protected Task parseEntity(ResultSet resultSet) {
 
 		try {
-			return new Task(resultSet.getInt("id_task"), resultSet.getString("to_do"), resultSet.getDate("request_date"),
-					resultSet.getDate("start_date"), resultSet.getDate("complete_date"), resultSet.getDouble("price"));
+			return new Task(resultSet.getInt(ID_TASK), resultSet.getString(TO_DO), resultSet.getDate(REQUEST_DATE),
+					resultSet.getDate(START_DATE), resultSet.getDate(COMPLETE_DATE), resultSet.getDouble(PRICE));
 		} catch (SQLException e) {
 			logger.error(SQL_ERROR);
 			return null;
