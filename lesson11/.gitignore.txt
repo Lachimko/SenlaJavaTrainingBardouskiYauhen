@@ -1,0 +1,17 @@
+.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp
+
+# Folders with .class files
+bin
+target
+
+# Package Files #
+.jar
+.war
+.ear
+.class
+
+# virtual machine crash logs, see httpwww.java.comendownloadhelperror_hotspot.xml
+hs_err_pid
