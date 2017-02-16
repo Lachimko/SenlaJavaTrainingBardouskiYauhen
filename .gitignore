@@ -1,3 +1,49 @@
+
+lesson12/auto-managment/auto-managment-ui/target/
+lesson12/auto-managment/core-API/target/
+lesson12/auto-managment/core-API/.settings/
+lesson12/auto-managment/.project
+lesson12/auto-managment/.settings/
+lesson12/auto-managment/core-API/.classpath
+lesson12/auto-managment/core-API/.project
+lesson12/auto-managment/dao-api/.classpath
+lesson12/auto-managment/dao-api/.project
+lesson12/auto-managment/dao-api/.settings/org.eclipse.jdt.core.prefs
+lesson12/auto-managment/dao-api/.settings/org.eclipse.m2e.core.prefs
+lesson12/auto-managment/dao-api/target/
+lesson12/auto-managment/props-configuration/.classpath
+lesson12/auto-managment/props-configuration/.project
+lesson12/auto-managment/props-configuration/.settings/org.eclipse.jdt.core.prefs
+lesson12/auto-managment/props-configuration/.settings/org.eclipse.m2e.core.prefs
+lesson12/auto-managment/props-configuration/target/
+lesson12/auto-managment/hibernate-conn-util/target/
+lesson12/auto-managment/hibernate-conn-util/.classpath
+lesson12/auto-managment/hibernate-conn-util/.project
+lesson12/auto-managment/hibernate-conn-util/.settings/org.eclipse.jdt.core.prefs
+lesson12/auto-managment/hibernate-conn-util/.settings/org.eclipse.m2e.core.prefs
+lesson12/auto-managment/dependency-context/target/classes/META-INF/maven/com.bardouski/dependency-context/pom.xml
+lesson12/auto-managment/dependency-context/target/
+lesson12/auto-managment/request-responce/.classpath
+lesson12/auto-managment/request-responce/.project
+lesson12/auto-managment/request-responce/.settings/org.eclipse.jdt.core.prefs
+lesson12/auto-managment/request-responce/.settings/org.eclipse.m2e.core.prefs
+lesson12/auto-managment/request-responce/target/
+lesson12/auto-managment/auto-managment-core/target/
+lesson12/auto-managment/auto-managment-model/target/
+lesson12/auto-managment/auto-managment-core/.classpath
+lesson12/auto-managment/auto-managment-core/.project
+lesson12/auto-managment/auto-managment-core/.settings/org.eclipse.jdt.core.prefs
+lesson12/auto-managment/auto-managment-core/.settings/org.eclipse.m2e.core.prefs
+lesson12/auto-managment/auto-managment-serverside/.project
+lesson12/auto-managment/auto-managment-model/.project
+lesson12/auto-managment/auto-managment-serverside/.settings/org.eclipse.jdt.core.prefs
+lesson12/auto-managment/auto-managment-serverside/.settings/org.eclipse.m2e.core.prefs
+lesson12/auto-managment/auto-managment-ui/.classpath
+lesson12/auto-managment/auto-managment-ui/.project
+lesson12/auto-managment/auto-managment-ui/.settings/org.eclipse.jdt.core.prefs
+lesson12/auto-managment/auto-managment-ui/.settings/org.eclipse.m2e.core.prefs
+lesson12/auto-managment/auto-managment-serverside/target/
+
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -15,3 +61,4 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
