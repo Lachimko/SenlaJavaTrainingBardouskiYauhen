@@ -1,0 +1,18 @@
+# Folders with .class files
+bin/*
+target/*
+
+# Class files ignore
+*.class
+
+# Ignoring Eclipse settings folder
+**.settings/*
+
+# Ignoring Eclipse .classpath and .project 
+*.classpath
+*.project
+
+# Package Files 
+*.jar
+*.war
+*.ear
