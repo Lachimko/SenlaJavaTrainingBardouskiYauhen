@@ -1,0 +1,69 @@
+<div>
+	<h1>{{caption}}</h1>
+<!-- 	<h1>Responce: {{resp}}</h1> -->
+	<form class="well">
+	  	<label>Register mechanic by full name</label>
+		  <input type="text" class="span3" placeholder="Mechanic name" data-ng-model="fullname">
+		</label>
+	 	<button class="btn btn-primary" data-ng-click="createByFullname()">Register</button>
+	</form>
+
+	<form class="well">
+	  	<label>Get mechanic by ID</label>
+		  <input data-ng-model="id" type="text" class="span3" placeholder="Mechanic id">
+		</label>
+	 	<button class="btn btn-primary" data-ng-click="findId()">Get</button>
+	</form>
+
+	<form class="well">
+	  	<label>Remove mechanic by ID</label>
+		  <input data-ng-model="id" type="text" class="span3" placeholder="Mechanic id">
+		</label>
+	 	<button type="submit" class="btn btn-danger" data-ng-click="removeById()">Remove</button>
+	</form>
+
+<!-- 	<form class="well">
+	  	<label>Get all mechanics</label>
+		 
+		</label>
+	 	<button type="submit" class="btn btn-primary">Get</button>
+	</form>
+ -->
+	<h2>__________________________________________________</h2>
+
+	<form class="well">
+
+        <label>Show state of mechanics</label>
+        <div class="form-group">
+            <div class="radio">
+            	<label>
+                    <input type="radio" name="sortValue" value="all" ng-model="radioValue">
+                    Show all
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="sortValue" value="name" ng-model="radioValue">
+                    Show sorted by Full name
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="sortValue" value="work" ng-model="radioValue">
+                    Show sorted by current work
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary" data-ng-click="viewList()">View</button>
+        </div>
+		
+	</form>
+
+	<ul>
+		<li ng-repeat="unit in mechanics">
+			<span>id: <b>{{unit.id}}</b></span>
+			<span>name:<b>{{unit.fullName}}</b></span>
+			<span>order:<b>{{unit.currentOrder}}</b></span>		
+		</li>
+	</ul>
+
+</div>
