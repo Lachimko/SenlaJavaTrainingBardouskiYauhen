@@ -1,0 +1,40 @@
+<html ng-app="app">
+<head>
+  <title></title>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+
+	  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item">
+	        <a ui-sref="mechanic">Mechnanic ctrl </a>
+	      </li>
+        <li class="nav-item">
+	        <a ui-sref="workplace">Workplace ctrl </a>
+	      </li>
+	      <li class="nav-item">
+	        <a ui-sref="order">Order ctrl </a>
+	      </li>
+	    </ul>
+
+	  </div>
+	</nav>
+
+  <ui-view></ui-view>
+
+  <!-- Angular library -->
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.js"></script>
+  
+	<!-- Angular route library -->
+  <script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="js/app.js"></script>
+  <script src="js/controllers/ctrl.js"></script>
+
+  <!-- Bootstrap -->
+  <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+
+</body>
+</html>
