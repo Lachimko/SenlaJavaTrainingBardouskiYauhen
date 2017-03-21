@@ -1,0 +1,69 @@
+<div data-ng-controller="WorkplaceCtrl">
+	<h1>{{caption}}</h1>
+	
+	<form class="well">
+	  	
+	  	<label>Register Garage Unit
+		 	<button type="submit" class="btn btn-primary">Register</button>
+	 	</label>
+		<br>
+		<label>Register Workplace Unit in Garage</label>
+			<input type="text" class="span3" placeholder="Garage Unit ID">
+			<button class="btn btn-primary">Register</button>
+		</label>
+		<br>
+	  	<label>Remove Workplace Unit in Garage</label>
+			<input type="text" class="span3" placeholder="Garage ID">
+			<input type="text" class="span3" placeholder="Workplace ID">
+			<button type="submit" class="btn btn-danger">Remove</button>
+		</label>
+
+	</form>
+
+	<form class="well">
+
+	  	<label>Get workplace by ID</label>
+			<input type="text" class="span3" placeholder="Mechanic id">
+			<button type="submit" class="btn btn-primary">Get</button>
+		</label>
+		<br>
+	  	<label>Get free places in date
+ 	 		<button type="submit" class="btn btn-primary">Get</button>
+ 	 	</label>
+	
+	</form>
+
+	<hr>
+
+	<form class="well">
+	  	<label>Show all places</label>
+ 	 	<button type="submit" class="btn btn-primary">Get</button>
+	</form>
+
+	<div>
+		<h2>Workplace result:</h2>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>name</th>
+					<th>order</th>
+					<th>features</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="unit in mechanics">
+					<td>{{unit.id}}</td>
+					<td>{{unit.fullName}}</td>
+					<td>{{unit.currentOrderId}}</td>
+					<td>
+						<button class="btn btn-primary" >Edit</button>
+						<button class="btn btn-danger" id-data="{{unit.id}}" data-ng-click="removeById()">Remove</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div uib-alert ng-class="'alert-danger'">{{mechanics.error}}</div>
+
+</div>

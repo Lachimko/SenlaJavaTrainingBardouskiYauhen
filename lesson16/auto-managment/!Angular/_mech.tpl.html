@@ -1,0 +1,77 @@
+<div data-ng-controller="MechanicCtrl">
+	<h1>{{caption}}</h1>
+	<form class="well">
+
+		<label>Register mechanic by full name
+			<input type="text" class="span3" placeholder="Mechanic name" data-ng-model="fullname">
+			<button class="btn btn-primary" data-ng-click="createByFullname()">Register</button>
+		</label>
+		<br>
+		<label>Get mechanic by ID
+			<input data-ng-model="id" type="text" class="span3" placeholder="Mechanic id">
+			<button class="btn btn-primary" data-ng-click="findId()">Get</button>
+		</label>
+		<br>
+		<label>Remove mechanic by ID
+			<input data-ng-model="id" type="text" class="span3" placeholder="Mechanic id">
+			<button type="submit" class="btn btn-danger" data-ng-click="removeById()">Remove</button>
+		</label>
+	
+	</form>
+
+	<hr>
+
+	<form class="well">
+
+	<label>Show state of mechanics</label>
+	<div class="form-group">
+		<div class="radio">
+			<label>
+			<input type="radio" name="sortValue" value="" ng-model="radioValue">
+			Show all
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+			<input type="radio" name="sortValue" value="fullName" ng-model="radioValue">
+			Show sorted by Full name
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+			<input type="radio" name="sortValue" value="currentOrder" ng-model="radioValue">
+			Show sorted by current work
+			</label>
+		</div>
+		<button class="btn btn-primary" data-ng-click="viewList()">View</button>
+	</div>
+
+	</form>
+
+	<div>
+		<h2>Mechanic result:</h2>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>name</th>
+					<th>order</th>
+					<th>features</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="unit in mechanics">
+					<td>{{unit.id}}</td>
+					<td>{{unit.fullName}}</td>
+					<td>{{unit.currentOrderId}}</td>
+					<td>
+						<button class="btn btn-primary" >Edit</button>
+						<button class="btn btn-danger" id-data="{{unit.id}}" data-ng-click="removeById()">Remove</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div uib-alert ng-class="'alert-danger'">{{mechanics.error}}</div>
+
+</div>
