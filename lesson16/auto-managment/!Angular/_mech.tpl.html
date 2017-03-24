@@ -11,11 +11,11 @@
 			<input data-ng-model="id" type="text" class="span3" placeholder="Mechanic id">
 			<button class="btn btn-primary" data-ng-click="findId()">Get</button>
 		</label>
-		<br>
+<!-- 		<br>
 		<label>Remove mechanic by ID
 			<input data-ng-model="id" type="text" class="span3" placeholder="Mechanic id">
 			<button type="submit" class="btn btn-danger" data-ng-click="removeById()">Remove</button>
-		</label>
+		</label> -->
 	
 	</form>
 
@@ -66,7 +66,7 @@
 					<td>{{unit.currentOrderId}}</td>
 					<td>
 						<button class="btn btn-primary" >Edit</button>
-						<button class="btn btn-danger" id-data="{{unit.id}}" data-ng-click="removeById()">Remove</button>
+						<button class="btn btn-danger" id-data="{{unit.id}}" data-ng-click="removeById(unit.id)">Remove</button>
 					</td>
 				</tr>
 			</tbody>
