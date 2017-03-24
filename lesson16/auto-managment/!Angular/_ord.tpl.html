@@ -2,80 +2,131 @@
 	<h1>{{caption}}</h1>
 	
 	<form class="well">
-		<h3>Register new Order</h3>
-	  	<label>toDo:</label>
-		  <input type="text" class="span3" placeholder="Mechanic name">
+		<label>Register new Order</label>
+		<br>
+		<label>toDo:
+			<input type="text" class="span6" placeholder="Todo text">
 		</label>
-	  	<label>requestDate:</label>
-		  <input type="text" class="span3" placeholder="Mechanic name">
-		</label>
+		<br>
 		<label>requestDate:</label>
-		  <input type="text" class="span3" placeholder="Mechanic name">
+			<input type="text" class="span3" placeholder="Request date">
 		</label>
+		<br>
 		<label>startDate:</label>
-		  <input type="text" class="span3" placeholder="Mechanic name">
+			<input type="text" class="span3" placeholder="Start date">
 		</label>
+		<br>
 		<label>completeDate:</label>
-		  <input type="text" class="span3" placeholder="Mechanic name">
+			<input type="text" class="span3" placeholder="Complete date">
 		</label>
+		<br>
 		<label>price:</label>
-		  <input type="text" class="span3" placeholder="Mechanic name">
+			<input type="text" class="span3" placeholder="Price">
 		</label>
-	 	<button type="submit" class="btn btn-primary">Register</button>
-	</form>
-	<br>
-
-	<form class="well">
-	  	<label>Get Order by ID</label>
-		  <input type="text" class="span3" placeholder="Order id">
-		</label>
-	 	<button type="submit" class="btn btn-primary">Get</button>
+		<br>
+		<button type="submit" class="btn btn-primary">Register</button>
 	</form>
 
 	<form class="well">
-	  	<label>Remove Order by ID</label>
-		  <input type="text" class="span3" placeholder="Order id">
+		<label>Get Order by ID</label>
+			<input type="text" class="span3" placeholder="Order id">
+			<button type="submit" class="btn btn-primary">Get</button>
 		</label>
-	 	<button type="submit" class="btn btn-danger">Remove</button>
 	</form>
 
 	<form class="well">
-	  	<label>Get all Orders</label>
-		  <!-- <input type="text" class="span3" placeholder="Mechanic id"> -->
-		</label>
-	 	<button type="submit" class="btn btn-primary">Get</button>
+
+	<label>Show list of orders</label>
+	<div class="form-group">
+		<div class="radio">
+			<label>
+			<input type="radio" name="sortValue" value="" ng-model="radioValue">
+			Show all
+			</label>
+		</div>
+		<!-- <div class="radio">
+			<label>
+			<input type="radio" name="sortValue" value="requestDate" ng-model="radioValue">
+			Show sorted by request Date
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+			<input type="radio" name="sortValue" value="startDate" ng-model="radioValue">
+			Show sorted by start Date
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+			<input type="radio" name="sortValue" value="completeDate" ng-model="radioValue">
+			Show sorted by complete Date
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+			<input type="radio" name="sortValue" value="price" ng-model="radioValue">
+			Show sorted by price
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+			<input type="radio" name="sortValue" value="orderStatus" ng-model="radioValue">
+			Show sorted by order status
+			</label>
+		</div> -->
+		<button class="btn btn-primary" data-ng-click="viewList()">View</button>
+	</div>
+
 	</form>
 
-	<h2>__________________________________________________</h2>
+	<div>
+		<h2>Order result:</h2>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<!-- <sorting-div column-name="id" object-property="id"></sorting-div> -->
+					<th>
+						<a href="" ng-click="sortType='id'; sortReverse = !sortReverse">id</a>		
+					</th>
+					<th>todo</th>
+					<th>
+						<a href="" ng-click="sortType='task.requestDate'; sortReverse = !sortReverse">request date</a>
+					</th>
+					<th>
+						<a href="" ng-click="sortType='task.startDate'; sortReverse = !sortReverse">start date</a>
+					</th>
+					<th>
+						<a href="" ng-click="sortType='task.completeDate'; sortReverse = !sortReverse">complete date</a>
+					</th>
+					<th>
+						<a href="" ng-click="sortType='task.price'; sortReverse = !sortReverse">price</a>
+					</th>
+					<th>
+						<a href="" ng-click="sortType='task.orderStatus'; sortReverse = !sortReverse">order status</a>
+					</th>
+					<th>features</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="order in orders | orderBy:sortType:sortReverse">
+					<td>{{order.id}}</td>
+					<td style="font-size: 0.8em">{{order.task.toDo}}</td>
+					<td>{{order.task.requestDate}}</td>
+					<td>{{order.task.startDate}}</td>
+					<td>{{order.task.completeDate}}</td>
+					<td>{{order.task.price}}</td>
+					<td>{{order.orderStatus}}</td>
+					<td>
+						<button class="btn btn-primary" >Edit</button>
+						<button class="btn btn-danger" id-data="{{unit.id}}" data-ng-click="removeById(order.id)">Remove</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div uib-alert ng-class="'alert-danger'">{{orders.error}}</div>
 
-	<form class="well">
-	  	<label>Get all Orders</label>
-	  	<label class="radio">
-		<input type="radio" name="optionsRadios" value="option1" checked="">
-		sorted by request Date
-		</label>
-		<label class="radio">
-		<input type="radio" name="optionsRadios" value="option2">
-		sorted by start Date
-		</label>
-		<label class="radio">
-		<input type="radio" name="optionsRadios" value="option3">
-		sorted by complete Date
-		</label>
-		<label class="radio">
-		<input type="radio" name="optionsRadios" value="option4">
-		sorted by price
-		</label>
 
-
-
-
-		<input type="radio" name="optionsRadios" value="option2">
-		sorted by workstatus
-		</label>
-		<button type="submit" class="btn btn-primary">Find</button>
-	</form>
-
-
+	<!-- <sorting-div></sorting-div> -->
 
 </div>
